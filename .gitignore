@@ -3,4 +3,5 @@
 #Ignore following files from git:
 
 /.sass-cache
+bower_components
 node_modules
