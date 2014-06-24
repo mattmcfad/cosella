@@ -87,8 +87,6 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-
-//uglify, concat, minify needed.
 	
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-jade');

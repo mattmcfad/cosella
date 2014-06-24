@@ -1,0 +1,23 @@
+$blue: #3498db;
+$black: #2c3e50;
+
+
+
+
+$helv: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$sans: 'Montserrat', sans-serif;
+
+
+@mixin m0 {
+	margin: 0 auto;
+}
+
+@mixin helvheavy {
+	font-family: $helv;
+	font-weight: 700;
+}
+
+@mixin helvlight {
+	font-family: $helv;
+	font-weight: 300;
+}
