@@ -31,66 +31,18 @@ var app = {
 					var color = app.getColor();
 					sel.css('background-color',color);
 					sel.data('id',color);
+					sel.data('solved','false');
 				}	
 			}
 		}	
 	},
 
 	getColor: function() {
-		var tot = 64;
 		var rand = Math.floor((Math.random() * (icons.length)));
 		return icons[rand].color;
 	}
 };
 
-var icons = [
-	{
-		color: "darkblue"
-	},
-	{
-		color: "teal"
-	},
-	{
-		color: "gold"
-	},
-	{
-		color: "darkorange"
-	},
-	{
-		color: "peachpuff"
-	},
-	{
-		color: "maroon"
-	},
-	{
-		color: "brown"
-	},
-	{
-		color: "peru"
-	},
-	{
-		color: "deeppink"
-	},
-	{
-		color: "cyan"
-	},
-	{
-		color: "darkseagreen"
-	},
-	{
-		color: "steelblue"
-	},
-	{
-		color: "darkviolet"
-	},
-	{
-		color: "firebrick"
-	},
-	{
-		color: "whitesmoke"
-	}
-
-];
 
 
 $(document).ready(function(){

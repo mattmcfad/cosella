@@ -19,6 +19,17 @@ module.exports = function(grunt) {
 		jshint: {
 			all: ['dev/javascript/*.js']
 		},
+		//concat JS files into 1
+		concat: {
+			options: {
+				separator: ';',
+			},
+			dist: {
+				src: ['dev/javascript/*js'], //take all js
+				dest: 'dist/scripts/main.min.js', //concat and send to dist,
+					//calling it .min.js but it wont be minified until uglify is ran.
+			},
+		},
 		//minify JS 
 		uglify: {
 			options: {
@@ -26,7 +37,7 @@ module.exports = function(grunt) {
 			},
 			js: {
 				files: { // dest : src
-					'dist/scripts/main.min.js' : ['dev/javascript/main.js']
+					'dist/scripts/main.min.js' : ['dist/scripts/main.min.js']
 				}
 			}
 		},
@@ -91,12 +102,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-jade');
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	//default task grunt will run...
-	grunt.registerTask('default', ['jshint','uglify','jade','connect','sass','autoprefixer','watch']);
+	grunt.registerTask('default', ['jshint','concat','uglify','jade','connect','sass','autoprefixer','watch']);
 
 };
