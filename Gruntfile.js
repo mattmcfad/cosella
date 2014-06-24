@@ -33,12 +33,12 @@ module.exports = function(grunt) {
 		//compile Jade
 		jade: {
 			html: {
-				files: {
-					'dist/' : ['dev/templates/*.jade']
-				},
 				options: {
 					client: false,
 					wrap: false
+				},
+				files: {
+					'dist/index.html': ['dev/templates/*.jade']
 				}
 			}
 		},
