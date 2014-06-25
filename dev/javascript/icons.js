@@ -15,7 +15,7 @@ var icons = [
 		color: "peachpuff"
 	},
 	{
-		color: "maroon"
+		color: "mediumturquoise"
 	},
 	{
 		color: "brown"
@@ -39,7 +39,7 @@ var icons = [
 		color: "darkviolet"
 	},
 	{
-		color: "firebrick"
+		color: "limegreen"
 	},
 	{
 		color: "whitesmoke"

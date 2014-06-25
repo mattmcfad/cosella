@@ -32,7 +32,7 @@ var app = {
 					var color = app.getColor();
 					sel.css('background-color',color);
 					sel.data('id',color);
-					sel.data('solved','false');
+					sel.data('solved',false);
 					sel.data('x',app.getX(sum));
 					sel.data('y',app.getY(sum));
 				}	
@@ -68,6 +68,18 @@ var app = {
 			console.log("nooo match");
 	},
 
+	matchSuccess: function(first,second) {
+		cell1 =  $('#'+app.getId(first.x,first.y));
+		cell2 =  $('#'+app.getId(second.x,second.y));
+
+		cell1.data('solved',true);
+		cell1.data('id',null);
+		cell2.data('solved',true);
+		cell2.data('id',null);
+		cell1.css('background-color','black');
+		cell2.css('background-color','black');
+	},
+
 	//make sure both cells are actually same type of icon
 	case0: function(first,second) {
 		return (first.id === second.id) ? true : false;
@@ -96,7 +108,7 @@ var app = {
 						solved = true;
 						break;
 					}
-					else if (cell.data().solved === "false"){
+					else if (cell.data().solved === false){
 						console.log('no match');
 						solved = false;
 						break;
@@ -117,7 +129,7 @@ var app = {
 						solved = true;
 						break;
 					}
-					else if (cell.data().solved === "false"){
+					else if (cell.data().solved === false){
 						console.log('no match');
 						solved = false;
 						break;
@@ -143,7 +155,7 @@ var app = {
 						break;
 					}
 
-					if (cell.data().solved === "false"){
+					if (cell.data().solved === false){
 						console.log('no match');
 						solved = false;
 						break;
@@ -162,13 +174,19 @@ var app = {
 						solved = true;
 						break;
 					}
-					if (cell.data().solved === "false"){
+					if (cell.data().solved === false){
 						console.log('no match');
 						solved = false;
 						break;
 					}
 				}
 			}
+		}
+		if (solved === true){
+			app.matchSuccess(first,second);
+		}
+		else {
+			console.log("no match");
 		}
 	}//case1
 };
