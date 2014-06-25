@@ -61,7 +61,7 @@ var app = {
 	checkMatch: function(){
 		//if (app.case0(app.first,app.second)) ? app.case1(app.first,app.second) : console.log("no match");
 
-		if (app.case0(app.first,app.second) ===true){
+		if (app.case0(app.first,app.second) === true){
 			app.case1(app.first,app.second);
 		}
 		else 
@@ -87,11 +87,13 @@ var app = {
 				cordY++;
 			}
 		}
+
+		/*************************/
+
 		//if they are both on the same row
 		else if (first.y === second.y){
 			console.log("on same row");
 
-			cordX = first.x;
 			//if selected [1] .... [2]
 			if (first.x < second.x){
 				while (cordX < second.x){
@@ -112,11 +114,25 @@ var app = {
 				}
 			}
 			//else selected [2] .... [1]
-			else if (first.y < second.y){
-
-			}	
+			else if (first.x > second.x){
+				while (cordX > second.x){
+					cordX--;
+					cell = $('#'+app.getId(cordX,cordY));
+					//console.log("Cell at ("+cordX+","+cordY+") "+cell.data().solved);
+					if (cordX === second.x){
+						console.log('match!');
+						solved = true;
+						break;
+					}
+					if (cell.data().solved === "false"){
+						console.log('no match');
+						solved = false;
+						break;
+					}
+				}
+			}
 		}
-	}
+	}//case1
 };
 
 
