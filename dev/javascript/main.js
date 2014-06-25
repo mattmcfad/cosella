@@ -53,10 +53,19 @@ var app = {
 		return Math.ceil(id/12);
 	},
 
+	getId: function(x,y){
+		//Y ordering starts at 1, account for this
+		return(x + 12 * (y-1));
+	},
+
 	checkMatch: function(){
+		//if (app.case0(app.first,app.second)) ? app.case1(app.first,app.second) : console.log("no match");
 
-		console.log(app.case0(app.first,app.second));
-
+		if (app.case0(app.first,app.second) ===true){
+			app.case1(app.first,app.second);
+		}
+		else 
+			console.log("nooo match");
 	},
 
 	//make sure both cells are actually same type of icon
@@ -66,11 +75,46 @@ var app = {
 
 	//two cells in either the same row or column
 	case1: function(first,second) {
+		
+		var cordX = first.x, cordY = first.y, solved = false, cell;
+
+		//if they are both on same column
 		if (first.x === second.x) {
 
+			while (cordY < second.y){
+				cell = $('#'+app.getId(cordX,cordY));
+				console.log(cell.data());
+				cordY++;
+			}
 		}
+		//if they are both on the same row
 		else if (first.y === second.y){
-			
+			console.log("on same row");
+
+			cordX = first.x;
+			//if selected [1] .... [2]
+			if (first.x < second.x){
+				while (cordX < second.x){
+					cordX++;
+					cell = $('#'+app.getId(cordX,cordY));
+					//console.log("Cell at ("+cordX+","+cordY+") "+cell.data().solved);
+					if (cordX === second.x){
+						console.log('match!');
+						solved = true;
+						break;
+					}
+
+					if (cell.data().solved === "false"){
+						console.log('no match');
+						solved = false;
+						break;
+					}
+				}
+			}
+			//else selected [2] .... [1]
+			else if (first.y < second.y){
+
+			}	
 		}
 	}
 };
@@ -84,8 +128,9 @@ $(document).ready(function(){
 	app.select = false;
 
 	$('.cell').on('click', function(event){
-		event.preventDefault();
 		
+		event.preventDefault();
+
 		if (app.select === false){
 			app.select = true;
 			app.first = $(this).data();
