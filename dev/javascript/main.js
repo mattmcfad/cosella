@@ -9,15 +9,16 @@ var app = {
 		var cellEnd = "></div>";
 		var cellHTML = '';
 
+		//append all the cells to the DOM
 		for (var i = 1; i < app.totCells+1; i++) {
 			cellHTML =  cellStart+i+cellEnd;
 			gamegrid.append(cellHTML);
 			cellHTML = cellStart;
 		}
-		app.reOrder(1);
+		app.buildIcons(1);
 	},
 
-	reOrder: function(level){
+	buildIcons: function(level){
 
 		if (level === 1) {
 			
@@ -32,6 +33,8 @@ var app = {
 					sel.css('background-color',color);
 					sel.data('id',color);
 					sel.data('solved','false');
+					sel.data('x',app.getX(sum));
+					sel.data('y',app.getY(sum));
 				}	
 			}
 		}	
@@ -40,6 +43,14 @@ var app = {
 	getColor: function() {
 		var rand = Math.floor((Math.random() * (icons.length)));
 		return icons[rand].color;
+	},
+	//if id % 12 = 0 then on 12th column, return 12, else return id % 12
+	getX: function(id) {
+		return (id % 12 === 0) ? 12 : id % 12; 
+	},
+	//return which row cell falls on based on 12 cells in a row
+	getY: function(id) {
+		return Math.ceil(id/12);
 	}
 };
 
@@ -49,9 +60,20 @@ $(document).ready(function(){
 	
 	app.level = 1;
 	app.init();
+	app.select = false;
 
-	$('.cell').on('click', function(){
-		console.log($(this).data());
+	$('.cell').on('click', function(event){
+		event.preventDefault();
+		
+		if (app.select === false){
+			app.select = true;
+			console.log($(this).data());
+			app.first = $(this).data();
+		} else {
+			app.select = false;
+		}
+		console.log('selected: ' + app.first.x);
+
 	});
 
 });
