@@ -78,13 +78,51 @@ var app = {
 		
 		var cordX = first.x, cordY = first.y, solved = false, cell;
 
+		/*************************/
+
 		//if they are both on same column
 		if (first.x === second.x) {
 
-			while (cordY < second.y){
-				cell = $('#'+app.getId(cordX,cordY));
-				console.log(cell.data());
-				cordY++;
+			//if selected [1]
+			//			   .
+			//			   .
+			//			  [2]
+			if (first.y < second.y){
+				while (cordY < second.y){
+					cordY++;
+					cell = $('#'+app.getId(cordX,cordY));
+					if(cordY === second.y){
+						console.log('match!');
+						solved = true;
+						break;
+					}
+					else if (cell.data().solved === "false"){
+						console.log('no match');
+						solved = false;
+						break;
+					}
+				}
+			}
+
+			//if selected [2]
+			//			   .
+			//			   .
+			//			  [1]
+			if (first.y > second.y){
+				while (cordY > second.y){
+					cordY--;
+					cell = $('#'+app.getId(cordX,cordY));
+					if(cordY === second.y){
+						console.log('match!');
+						solved = true;
+						break;
+					}
+					else if (cell.data().solved === "false"){
+						console.log('no match');
+						solved = false;
+						break;
+					}
+				}
 			}
 		}
 
@@ -92,14 +130,13 @@ var app = {
 
 		//if they are both on the same row
 		else if (first.y === second.y){
-			console.log("on same row");
-
+			//
 			//if selected [1] .... [2]
+			//
 			if (first.x < second.x){
 				while (cordX < second.x){
 					cordX++;
 					cell = $('#'+app.getId(cordX,cordY));
-					//console.log("Cell at ("+cordX+","+cordY+") "+cell.data().solved);
 					if (cordX === second.x){
 						console.log('match!');
 						solved = true;
@@ -113,12 +150,13 @@ var app = {
 					}
 				}
 			}
+			//
 			//else selected [2] .... [1]
+			//
 			else if (first.x > second.x){
 				while (cordX > second.x){
 					cordX--;
 					cell = $('#'+app.getId(cordX,cordY));
-					//console.log("Cell at ("+cordX+","+cordY+") "+cell.data().solved);
 					if (cordX === second.x){
 						console.log('match!');
 						solved = true;
