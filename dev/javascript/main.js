@@ -51,6 +51,27 @@ var app = {
 	//return which row cell falls on based on 12 cells in a row
 	getY: function(id) {
 		return Math.ceil(id/12);
+	},
+
+	checkMatch: function(){
+
+		console.log(app.case0(app.first,app.second));
+
+	},
+
+	//make sure both cells are actually same type of icon
+	case0: function(first,second) {
+		return (first.id === second.id) ? true : false;
+	},
+
+	//two cells in either the same row or column
+	case1: function(first,second) {
+		if (first.x === second.x) {
+
+		}
+		else if (first.y === second.y){
+			
+		}
 	}
 };
 
@@ -67,12 +88,13 @@ $(document).ready(function(){
 		
 		if (app.select === false){
 			app.select = true;
-			console.log($(this).data());
 			app.first = $(this).data();
 		} else {
 			app.select = false;
+			app.second = $(this).data();
+
+			app.checkMatch();
 		}
-		console.log('selected: ' + app.first.x);
 
 	});
 
