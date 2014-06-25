@@ -91,7 +91,7 @@ module.exports = function(grunt) {
 			},
 			javascript: {
 				files: ['dev/javascript/*.js'],
-				tasks: ['jshint','uglify:js'],
+				tasks: ['jshint','concat','uglify:js'],
 				options: {
 					livereload: true
 				}
