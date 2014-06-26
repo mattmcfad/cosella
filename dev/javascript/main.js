@@ -209,7 +209,7 @@ var app = {
 
 		}
 
-		else if (cordY === second.y) {
+		else if (true) {
 			//while we haven't reached the top of the board
 			while (cordY > -1 && solved !== true) {
 				cordY--;
@@ -282,11 +282,19 @@ $(document).ready(function(){
 		if (app.select === false){
 			app.select = true;
 			app.first = $(this).data();
-		} else {
-			app.select = false;
-			app.second = $(this).data();
+		} 
+		else {
 
-			app.checkMatch();
+			if ( app.getId( $(this).data().x,$(this).data().y) === app.getId( app.first.x, app.first.y) ){
+				console.log('no same onez1!!');
+				app.select = false;
+			}
+			else{
+				app.select = false;
+				app.second = $(this).data();
+
+				app.checkMatch();
+			}
 		}
 
 	});
