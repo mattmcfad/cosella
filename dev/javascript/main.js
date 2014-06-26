@@ -62,7 +62,8 @@ var app = {
 		//if (app.case0(app.first,app.second)) ? app.case1(app.first,app.second) : console.log("no match");
 
 		if (app.case0(app.first,app.second) === true){
-			app.case1(app.first,app.second);
+			if (app.case1(app.first,app.second) === false)
+				app.case2(app.first,app.second);
 		}
 		else 
 			console.log("nooo match");
@@ -82,6 +83,9 @@ var app = {
 
 	//make sure both cells are actually same type of icon
 	case0: function(first,second) {
+		//if either id has matched 
+		if (first.solved === true || second.solved === true)
+			return false;
 		return (first.id === second.id) ? true : false;
 	},
 
@@ -109,7 +113,7 @@ var app = {
 						break;
 					}
 					else if (cell.data().solved === false){
-						console.log('no match');
+						console.log('noz match');
 						solved = false;
 						break;
 					}
@@ -130,7 +134,7 @@ var app = {
 						break;
 					}
 					else if (cell.data().solved === false){
-						console.log('no match');
+						console.log('noh match');
 						solved = false;
 						break;
 					}
@@ -156,7 +160,7 @@ var app = {
 					}
 
 					if (cell.data().solved === false){
-						console.log('no match');
+						console.log('noe match');
 						solved = false;
 						break;
 					}
@@ -175,7 +179,7 @@ var app = {
 						break;
 					}
 					if (cell.data().solved === false){
-						console.log('no match');
+						console.log('noa match');
 						solved = false;
 						break;
 					}
@@ -184,11 +188,83 @@ var app = {
 		}
 		if (solved === true){
 			app.matchSuccess(first,second);
+			return true;
+
 		}
 		else {
-			console.log("no match");
+			console.log("no_match");
+			return false;
 		}
-	}//case1
+	},//case1
+
+	case2: function(first,second) {
+		var cordX = first.x, cordY = first.y, solved = false, cell;
+		console.log("runz");
+		//  .............
+		//  : [X][X][X] :
+		// [1][X][X][X][2]
+
+		//if they 
+		if (cordX === second.x) {
+
+		}
+
+		else if (cordY === second.y) {
+			//while we haven't reached the top of the board
+			while (cordY > -1 && solved !== true) {
+				cordY--;
+				console.log("moved up to:("+cordX+","+cordY+")");
+				cell = $('#'+app.getId(cordX,cordY));
+				//if the cell just moved up towards is empty
+				if (cell.data().solved === true || cell.data().solved === undefined){
+					//while we haven't reached the same columm
+					while(cordX < second.x) {
+						cordX++; //move right 1 column
+						console.log("moved right to:("+cordX+","+cordY+")");
+						cell = $('#'+app.getId(cordX,cordY));
+						//if the column we just moved to is not occupied
+						
+						if(cell.data().solved === true || cell.data().solved === undefined){
+							//if reached same colum, iterate down.
+							if(cordX === second.x){
+								//while we haven't moved down far enough
+								while (cordY < second.y){
+									cordY++;
+									console.log("moved down to:("+cordX+","+cordY+")");
+									cell = $('#'+app.getId(cordX,cordY));
+
+									//if we reached the same x and y position, solved
+									if(cordY === second.y) {
+										console.log("MATCH!!!!");
+										//app.matchSuccess(first,second);
+										solved = true;
+										break;
+									}
+									//else if cell we just went to is occupied, break
+									else if (cell.data().solved === false){
+										console.log("no match;");
+										break;
+									}
+								}//third while
+							}	
+						}
+						//else colum moved to the right is occuped
+						else
+							break;
+						
+					}//2nd while
+				}
+				//else the cell above is occupied, break
+				else
+					break;
+			}//first while
+		}
+		if (solved === true) {
+			app.matchSuccess(first,second);
+		}
+
+	}//case2
+
 };
 
 

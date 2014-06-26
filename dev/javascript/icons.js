@@ -15,7 +15,7 @@ var icons = [
 		color: "peachpuff"
 	},
 	{
-		color: "mediumturquoise"
+		color: "red"
 	},
 	{
 		color: "brown"
