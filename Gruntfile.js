@@ -91,7 +91,9 @@ module.exports = function(grunt) {
 			},
 			javascript: {
 				files: ['dev/javascript/*.js'],
-				tasks: ['jshint','concat','uglify:js'],
+				//uglify only on deploy
+				//tasks: ['jshint','concat','uglify:js'],
+				tasks: ['jshint','concat'],
 				options: {
 					livereload: true
 				}
@@ -109,6 +111,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	//default task grunt will run...
-	grunt.registerTask('default', ['jshint','concat','uglify','jade','connect','sass','autoprefixer','watch']);
+	grunt.registerTask('default', ['jshint','concat','jade','connect','sass','autoprefixer','watch']);
+
+	//uglify for distribution
+	grunt.registerTask('deploy', ['jshint','concat','uglify','jade','connect','sass','autoprefixer','watch']);
 
 };
