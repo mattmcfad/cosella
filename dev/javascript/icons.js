@@ -3,19 +3,19 @@ var icons = [
 		color: "darkblue"
 	},
 	{
-		color: "teal"
+		color: "saddlebrown"
 	},
 	{
 		color: "gold"
 	},
 	{
-		color: "darkorange"
+		color: "gray"
 	},
 	{
-		color: "peachpuff"
+		color: "mediumaquamarine"
 	},
 	{
-		color: "red"
+		color: "darkkhaki"
 	},
 	{
 		color: "brown"
@@ -30,7 +30,7 @@ var icons = [
 		color: "cyan"
 	},
 	{
-		color: "darkseagreen"
+		color: "lightcoral"
 	},
 	{
 		color: "steelblue"

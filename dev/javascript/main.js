@@ -203,7 +203,7 @@ var app = {
 		
 
 
-
+		// CASE A & B
 		if (first.x < second.x){
 
 			// *********    CASE A    **********   
@@ -278,6 +278,7 @@ var app = {
 
 		//final
 		if (solved === true) {
+			console.log("here");
 			app.matchSuccess(first,second);
 		}
 
