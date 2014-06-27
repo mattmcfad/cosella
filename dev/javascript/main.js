@@ -222,14 +222,14 @@ var app = {
 						cordX++; //move right 1 column
 						console.log("moved right to:("+cordX+","+cordY+")");
 						cell = $('#'+app.getId(cordX,cordY));
-						//if the column we just moved to is not occupied
+						
 						if(cordY === second.y && cordX === second.x) {
 							console.log("MATCH!!!!");
 							//app.matchSuccess(first,second);
 							solved = true;
 							break;
 						}
-
+						//if the column we just moved to is not occupied
 						if(cell.data().solved === true || cell.data().solved === undefined){
 							//if reached same colum, iterate down.
 							if(cordX === second.x){
@@ -259,6 +259,8 @@ var app = {
 							break;
 						
 					}//2nd while
+					//reset cordX
+					cordX = first.x;
 				}
 				//else the cell above is occupied, break
 				else
@@ -269,7 +271,20 @@ var app = {
 			app.matchSuccess(first,second);
 		}
 
-	}//case2
+	},//case2
+
+	case3: function() {
+
+
+
+
+
+
+
+
+	}//case3
+
+
 
 };
 
