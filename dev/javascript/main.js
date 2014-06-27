@@ -198,14 +198,14 @@ var app = {
 	},//case1
 
 	case2: function(first,second) {
-		var cordX = first.x, cordY = first.y, solved = false, cell;
+		var cordX = first.x, cordY = first.y, tempX, tempY, solved = false, cell;
 		console.log("=================================");
 		
 
 
 		// CASE A & B
 		if (first.x < second.x){
-
+			console.log("hit case A & B");
 			// *********    CASE A    **********   
 			//
 			//  ............. 	 .....[2]    ..........
@@ -213,9 +213,15 @@ var app = {
 			// [1][X][X][X][2]  [1][X][X]   [1][X][X] :
 			//                              [X][X][X][2]
 	        if (solved === false) {
+	        	console.log("not solved!");
 				//while we haven't reached the top of the board
-				while (cordY > -1 && solved !== true) {
+				while (cordY > 1 && solved !== true) {
 					cordY--;
+					console.log("cordY: " + cordY );
+					if(cordY === 0){
+						break;
+					}
+
 					console.log("moved up to:("+cordX+","+cordY+")");
 					cell = $('#'+app.getId(cordX,cordY));
 					//if the cell just moved up towards is empty
@@ -237,6 +243,7 @@ var app = {
 								//if reached same colum, iterate down.
 								if(cordX === second.x){
 									//while we haven't moved down far enough
+									tempY = cordY;
 									while (cordY < second.y){
 										cordY++;
 										console.log("moved down to:("+cordX+","+cordY+")");
@@ -255,6 +262,8 @@ var app = {
 											break;
 										}
 									}//third while
+									cordY = tempY;
+
 								}	
 							}
 							//else colum moved to the right is occuped
