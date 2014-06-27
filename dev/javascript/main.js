@@ -223,7 +223,13 @@ var app = {
 						console.log("moved right to:("+cordX+","+cordY+")");
 						cell = $('#'+app.getId(cordX,cordY));
 						//if the column we just moved to is not occupied
-						
+						if(cordY === second.y && cordX === second.x) {
+							console.log("MATCH!!!!");
+							//app.matchSuccess(first,second);
+							solved = true;
+							break;
+						}
+
 						if(cell.data().solved === true || cell.data().solved === undefined){
 							//if reached same colum, iterate down.
 							if(cordX === second.x){
