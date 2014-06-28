@@ -807,7 +807,6 @@ var app = {
 
 		//final
 		if (solved) {
-			console.log("here");
 			app.matchSuccess(first,second);
 		}
 
@@ -815,6 +814,78 @@ var app = {
 
 	//Zig Zagz
 	case3: function() {
+		var cordX = first.x, cordY = first.y, tempX, tempY, solved = false, cell;
+		console.log("---------------------------------");
+		
+		function init() {
+			cordX = first.x; 
+			cordY = first.y;
+			solved = false;
+		}
+		
+		// Case I & J
+		if (first.x < second.x){
+
+			// Case I
+			if (!solved){
+
+			}
+
+			// Case J
+			if (!solved){
+
+			}
+		}
+
+		// Case K & L
+		if (first.y > second.y){
+
+			// Case K
+			if(!solved){
+
+			}
+
+			// Case L
+			if(!solved){
+
+			}
+		}
+
+		// Case M & N
+		if (first.x > second.x){
+			
+			// Case M
+			if(!solved){
+
+			}
+
+			// Case N
+			if(!solved){
+
+			}
+		}
+
+		// Case O & P
+		if (first.y < second.y){
+
+			//Case O
+			if(!solved){
+
+			}
+
+			//Case P
+			if(!solved){
+				
+			}
+		}
+
+
+
+
+		//final
+		if (solved) {
+			app.matchSuccess(first,second);
+		}
 
 
 	}//case3
