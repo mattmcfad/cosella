@@ -206,23 +206,23 @@ var app = {
 		// CASE A & B
 		if (first.x < second.x){
 			console.log("hit case A & B");
+
+
+
+
 			// *********    CASE A    **********   
 			//
 			//  ............. 	 .....[2]    ..........
 			//  : [X][X][X] :    : [X][X]    : [X][X] :
 			// [1][X][X][X][2]  [1][X][X]   [1][X][X] :
 			//                              [X][X][X][2]
-	        if (solved === false) {
-	        	console.log("not solved!");
+	        if (!solved) {
+	        	
 				//while we haven't reached the top of the board
 				while (cordY > 1 && solved !== true) {
-					cordY--;
-					console.log("cordY: " + cordY );
-					if(cordY === 0){
-						break;
-					}
-
+					cordY--;//move up 1 row
 					console.log("moved up to:("+cordX+","+cordY+")");
+					//get the new cell that we moved to.
 					cell = $('#'+app.getId(cordX,cordY));
 					//if the cell just moved up towards is empty
 					if (cell.data().solved === true || cell.data().solved === undefined){
@@ -231,7 +231,7 @@ var app = {
 							cordX++; //move right 1 column
 							console.log("moved right to:("+cordX+","+cordY+")");
 							cell = $('#'+app.getId(cordX,cordY));
-							
+							//if we have moved up and right to the location
 							if(cordY === second.y && cordX === second.x) {
 								console.log("MATCH!!!!");
 								//app.matchSuccess(first,second);
@@ -242,13 +242,13 @@ var app = {
 							if(cell.data().solved === true || cell.data().solved === undefined){
 								//if reached same colum, iterate down.
 								if(cordX === second.x){
-									//while we haven't moved down far enough
+									//when we iterate down we change cordY, cache it to prevent infinite loop
 									tempY = cordY;
+									//while we haven't moved down far enough
 									while (cordY < second.y){
-										cordY++;
+										cordY++; //move down
 										console.log("moved down to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-
 										//if we reached the same x and y position, solved
 										if(cordY === second.y) {
 											console.log("MATCH!!!!");
@@ -262,8 +262,8 @@ var app = {
 											break;
 										}
 									}//third while
+									//reset to same cordY before going right and down.
 									cordY = tempY;
-
 								}	
 							}
 							//else colum moved to the right is occuped
@@ -271,22 +271,29 @@ var app = {
 								break;
 							
 						}//2nd while
-						//reset cordX
+						//reset cordX since iterated to new cordY
 						cordX = first.x;
 					}
 					//else the cell above is occupied, break
 					else
 						break;
 				}//first while
+			}//if !solved 
+
+			// *********    CASE B    **********   
+			//
+			//	[1][X][X]     [1][X][X]   [X][X][2]
+			//	 : [X][X][2]   : [X][X]   [1][X] :
+			//	 : [X][X] :    : [X][X]	   : [X] :
+			//   :........:    :... [2]    :.....:              
+			if (!solved){
+				console.log("Case B");
 			}
-
-
-
 
 		}// CASE A & B
 
 		//final
-		if (solved === true) {
+		if (solved) {
 			console.log("here");
 			app.matchSuccess(first,second);
 		}
