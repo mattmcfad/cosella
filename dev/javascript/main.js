@@ -907,6 +907,61 @@ var app = {
 				console.log("Case J");
 				init();
 
+				// While we reached the same column 
+				while (cordX < second.x && !solved) {
+					cordX++; // Go right one column
+					console.log("moved right to:("+cordX+","+cordY+")");
+					// Get the new cell that we moved to.
+					cell = $('#'+app.getId(cordX,cordY));
+					// If the cell just moved right to is empty
+					if (cell.data().solved === true || cell.data().solved === undefined){
+						// While we haven't reached the same row
+						while (cordY < second.y) {
+							cordY++; // Go down one row
+							console.log("moved down to:("+cordX+","+cordY+")");
+							cell = $('#'+app.getId(cordX,cordY));
+							// If we have moved right and down to the location
+							if (cordY === second.y && cordX === second.x) {
+								console.log("Match! via Case J");
+								solved = true;
+								break;
+							}
+							// If the row we just moved down to is empty
+							if (cell.data().solved === true || cell.data().solved === undefined) {
+								// If we reached same row
+								if (cordY === second.y) {
+									// When we iterate across we change cordX, cache it to prevent havoc
+									tempX = cordX;
+									// While we haven't moved far enough right
+									while (cordX < second.x) {
+										cordX++; //move right
+										console.log("moved right to:("+cordX+","+cordY+")");
+										cell = $('#'+app.getId(cordX,cordY));
+										// If we reached the same x and y position, solved
+										if (cordX === second.x) {
+											console.log("Match! via Case J");
+											solved = true;
+											break;
+										}
+
+									}// Third while
+									// Reset to same cordX before going right and down
+									cordX = tempX;				
+								}
+							}
+							// Else row moved down to is occupied
+							else
+								break;
+						}// 2nd while
+						// Reset y cord after iterating down and right
+						cordY = first.y;
+					}
+					//else the cell to the right is occupied
+					else
+						break;
+
+				}// first while
+
 			}
 		}// Case I & J
 
