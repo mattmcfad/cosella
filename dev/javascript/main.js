@@ -4,6 +4,8 @@
  *  app.currentLevel - Current level (out of 4)
  *  app.totSolved    - Total # of solved Icons for current level
  *  app.totIcons     - Total # of Icons on board for current level
+ *  app.First        - Object containing Data of first cell selected
+ *  app.second       - Object containing Data of second cell selected
  */
 
 
@@ -28,6 +30,38 @@ var app = {
 		}
 
 		app.buildIcons(app.currentLevel);
+	},
+
+	eventListeners: function(){
+		
+		var select; // Test if selected
+
+		$('.cell').on('click', function(event){
+				
+				event.preventDefault();
+
+				if (select === false){
+					select = true;
+					app.first = $(this).data();
+				} 
+				else {
+
+					if ( app.getId( $(this).data().x,$(this).data().y) === app.getId( app.first.x, app.first.y) ){
+						console.log('no same onez1!!');
+						select = false;
+					}
+					else{
+						select = false;
+						app.second = $(this).data();
+
+						app.checkMatch();
+					}
+				}
+
+		});
+
+
+
 	},
 
 	buildIcons: function(level){
@@ -173,7 +207,7 @@ var app = {
 					app.case3(app.first,app.second);
 		}
 		else 
-			console.log("Select the same Icon"); // Not same Icon
+			console.log("Try to select the same Icon"); // Not same Icon
 	},
 
 	matchSuccess: function(first,second) {
@@ -1519,32 +1553,7 @@ var app = {
 
 $(document).ready(function(){
 	
-	app.level = 1;
 	app.init();
-	app.select = false;
-
-	$('.cell').on('click', function(event){
-		
-		event.preventDefault();
-
-		if (app.select === false){
-			app.select = true;
-			app.first = $(this).data();
-		} 
-		else {
-
-			if ( app.getId( $(this).data().x,$(this).data().y) === app.getId( app.first.x, app.first.y) ){
-				console.log('no same onez1!!');
-				app.select = false;
-			}
-			else{
-				app.select = false;
-				app.second = $(this).data();
-
-				app.checkMatch();
-			}
-		}
-
-	});
+	app.eventListeners();
 
 });
