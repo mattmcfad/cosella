@@ -23,7 +23,7 @@ var app = {
 
 
 		// 120 seconds
-		app.count = 120000;
+		app.count = 120;
 		$('#countdown').html(formatTime(app.count));
 
 
@@ -257,7 +257,7 @@ var app = {
 			return octocats[rand].img;
 		}
 		else
-			return getOctocat();
+			return app.getOctocat();
 	},
 
 	// If id % 12 = 0 then on 12th column, return 12, else return id % 12
@@ -354,6 +354,7 @@ var app = {
 
 	gameOver: function() {
 		$('#timesUp').fadeIn();
+		$('#gameOverOcto').attr('src','../images/octocats/gameover.png');
 
 	},
 
@@ -377,8 +378,6 @@ $(document).ready(function(){
 	
 	app.init();
 	app.eventListeners();
-
-	app.nextLevel();
 
 });
 

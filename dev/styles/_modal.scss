@@ -22,6 +22,13 @@
     text-align: center;
     padding: 50px;
 
+    
+    h3 {
+      .totscore {
+        display: inline;
+      }
+    }
+
     .case {
       float: left;
       width: 50%;
@@ -60,9 +67,9 @@
 
     }
 
-    #octocat {
-      width: 75%;
-      height: 75%;
+    .octocat {
+      width: 70%;
+      height: 70%;
     }
 
   }
