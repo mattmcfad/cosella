@@ -323,6 +323,9 @@ a {
 .gamebox .header h2#score {
   text-align: right;
 }
+.gamebox .header h2 p {
+  display: inline;
+}
 .gamebox .gamegrid {
   margin: inherit;
   width: 606px;

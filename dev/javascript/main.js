@@ -14,6 +14,9 @@ var app = {
 
 	init: function(){
 		
+		// Start timer
+		timer.set({ time : 10, autostart : false });
+
 		app.totCells = 144;
 		app.currentLevel = 1;
 		var gamegrid = $('#gamegrid');
@@ -39,6 +42,10 @@ var app = {
 		$('.cell').on('click', function(event){
 				
 			event.preventDefault();
+
+			if (!timer.isActive){
+				timer.play(true);
+			}
 
 			if (select === false){
 				select = true;
@@ -238,6 +245,9 @@ var app = {
 	testLevelCompletion: function() {
 
 		if (app.totSolved === app.totIcons) {
+			timer.stop();
+			count = 115000;
+			$('#countdown').html(formatTime(count));
 			console.log("win");
 			// if you beat level 4 keep playing it
 			if (app.currentLevel !== 4 )
