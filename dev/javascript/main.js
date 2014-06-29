@@ -1,24 +1,38 @@
+
+/*	Global Variables
+ *	app.totCells     - Total # of cells on board
+ *  app.currentLevel - Current level (out of 4)
+ *  app.totSolved    - Total # of solved Icons for current level
+ *  app.totIcons     - Total # of Icons on board for current level
+ */
+
+
+
 var app = {
 
 	init: function(){
 		
 		app.totCells = 144;
+		app.currentLevel = 1;
 		var gamegrid = $('#gamegrid');
 
 		var cellStart = '<div class=cell id=';
 		var cellEnd = "></div>";
 		var cellHTML = '';
 
-		//append all the cells to the DOM
+		// Append all the cells to the DOM
 		for (var i = 1; i < app.totCells+1; i++) {
 			cellHTML =  cellStart+i+cellEnd;
 			gamegrid.append(cellHTML);
 			cellHTML = cellStart;
 		}
-		app.buildIcons(1);
+
+		app.buildIcons(app.currentLevel);
 	},
 
 	buildIcons: function(level){
+
+		app.totSolved = 0;  // Reset # of solved icons
 
 		var distribution,   // Array representing # of times each icon has been Drawn
 		    totDistributed, // Int keeps track of total number of icons drawn
@@ -64,6 +78,7 @@ var app = {
 			}
 
 			totalOutput =  rows * columns;
+			app.totIcons = totalOutput; // Total # of icons to be solved
 			totDistributed = 0;
 			selector = '#';
 
@@ -73,21 +88,21 @@ var app = {
 
 		init(level);
 
-		for (var i = 0; i < rows; i++) {
-			for(var j = 0; j < columns; j++){
+		for (var i = 0; i < columns; i++) {
+			for(var j = 0; j < rows; j++){
 				sum = start + i + j*12; //id on grid
 				var sel = $(selector+sum);
 				
 
-				//ensure everything has a match
+				// Ensure everything has a match when close to limit
 				if (totalOutput - totDistributed <= icons.length){
 
-					odd = false;
+					odd = false; // Test if found odd # of a distributed icon
 					
-					//iterate through distribution and test to see what is odd
+					// Iterate through distribution and test to see what is odd
 					for (var k = 0; k < distribution.length; k++){
 
-						//if odd number distributed, get that icon to even out
+						// If odd number distributed, get that icon to even out
 						if (distribution[k] % 2 === 1 ){
 							icon = icons[k];
 							
@@ -95,19 +110,21 @@ var app = {
 							break;
 						}
 					}
-
-					if (odd === false)
-						icon = app.getIcon();
+					// Else all icons are evenly distributed
+					if (odd === false){
+						// Get random icon
+						icon = app.getIcon();						
+					}
 				}
 
 				else 
 					icon = app.getIcon();
 
-				distribution[icon.id]++;
-
+				// Increase tot distributed for that particular Icon
+				distribution[icon.id]++; 
+				// Increase total icons distributed
 				totDistributed++;
 				
-
 				var color = icon.color;
 				sel.css('background-color',color);
 				sel.data('id',color);
@@ -118,34 +135,45 @@ var app = {
 		}
 	},
 
+	// Randomly select and Icon
+	// @return Object - Icon from Icons.js
 	getIcon: function() {
 		var rand = Math.floor((Math.random() * (icons.length)));
 		return icons[rand];
 	},
-	//if id % 12 = 0 then on 12th column, return 12, else return id % 12
+
+	// If id % 12 = 0 then on 12th column, return 12, else return id % 12
+	// @param id - represents an position on the grid from 1-144
+	// @return int - An x coordinate representing which column the icon is on 
 	getX: function(id) {
 		return (id % 12 === 0) ? 12 : id % 12; 
 	},
-	//return which row cell falls on based on 12 cells in a row
+
+	// Return which row cell falls on based on 12 cells in a row
+	// @param id - represents an position on the grid from 1-144
+	// @return int - An y coordinate representing which row the icon is on
 	getY: function(id) {
 		return Math.ceil(id/12);
 	},
 
 	getId: function(x,y){
-		//Y ordering starts at 1, account for this
+		// Y ordering starts at 1, account for this
 		return(x + 12 * (y-1));
 	},
 
 	checkMatch: function(){
-		//if (app.case0(app.first,app.second)) ? app.case1(app.first,app.second) : console.log("no match");
-
+		
+		// If they are both the same icon
 		if (app.case0(app.first,app.second) === true){
+			// If they are both on same X or Y axis
 			if (app.case1(app.first,app.second) === false)
+				// If they can be matched through U or L shaped paths
 				if(app.case2(app.first,app.second) === false)
+					// Attempt to match through Zig-Zag pattern
 					app.case3(app.first,app.second);
 		}
 		else 
-			console.log("nooo match");
+			console.log("Select the same Icon"); // Not same Icon
 	},
 
 	matchSuccess: function(first,second) {
@@ -158,41 +186,54 @@ var app = {
 		cell2.data('id',null);
 		cell1.css('background-color','black');
 		cell2.css('background-color','black');
+
+		// Just matched two squares.
+		app.totSolved = app.totSolved + 2;
+
+		app.testLevelCompletion();
+
 	},
 
-	//make sure both cells are actually same type of icon
+	testLevelCompletion: function() {
+
+		if (app.totSolved === app.totIcons) {
+			console.log("win");
+			app.currentLevel++;
+			app.buildIcons(app.currentLevel);
+		}
+	},
+
+	// Make sure both cells are actually same type of icon
 	case0: function(first,second) {
-		//if either id has matched 
+		// If either id has matched 
 		if (first.solved === true || second.solved === true)
 			return false;
 		return (first.id === second.id) ? true : false;
 	},
 
-	//two cells in either the same row or column
+	// Two cells in either the same row or column
 	case1: function(first,second) {
 		
 		var cordX = first.x, cordY = first.y, solved = false, cell;
 
 		/*************************/
 
-		//if they are both on same column
+		// If they are both on same column
 		if (first.x === second.x) {
 
-			//if selected [1]
-			//			   .
-			//			   .
-			//			  [2]
+			// If selected [1]
+			//			    .
+			//	       		.
+			//	 		   [2]
 			if (first.y < second.y){
 				while (cordY < second.y){
 					cordY++;
 					cell = $('#'+app.getId(cordX,cordY));
 					if(cordY === second.y){
-						
 						solved = true;
 						break;
 					}
 					else if (cell.data().solved === false){
-
 						solved = false;
 						break;
 					}
@@ -226,7 +267,7 @@ var app = {
 		//if they are both on the same row
 		else if (first.y === second.y){
 			//
-			//if selected [1] .... [2]
+			// If selected [1] .... [2]
 			//
 			if (first.x < second.x){
 				while (cordX < second.x){
@@ -246,7 +287,7 @@ var app = {
 				}
 			}
 			//
-			//else selected [2] .... [1]
+			// Else selected [2] .... [1]
 			//
 			else if (first.x > second.x){
 				while (cordX > second.x){
@@ -302,64 +343,64 @@ var app = {
 	        	console.log("Case A");
 	        	init();
 
-				//while we haven't reached the top of the board
+				// While we haven't reached the top of the board
 				while (cordY > 1 && solved !== true) {
-					cordY--;//move up 1 row
+					cordY--;// Move up 1 row
 					console.log("moved up to:("+cordX+","+cordY+")");
-					//get the new cell that we moved to.
+					// Get the new cell that we moved to.
 					cell = $('#'+app.getId(cordX,cordY));
-					//if the cell just moved up to is empty
+					// If the cell just moved up to is empty
 					if (cell.data().solved === true || cell.data().solved === undefined){
-						//while we haven't reached the same columm
+						// While we haven't reached the same columm
 						while(cordX < second.x) {
-							cordX++; //move right 1 column
+							cordX++; // Move right 1 column
 							console.log("moved right to:("+cordX+","+cordY+")");
 							cell = $('#'+app.getId(cordX,cordY));
-							//if we have moved up and right to the location
+							// If we have moved up and right to the location
 							if(cordY === second.y && cordX === second.x) {
 								console.log("MATCH!!!! via Case A");
 								solved = true;
 								break;
 							}
-							//if the column we just moved to is not occupied
+							// If the column we just moved to is not occupied
 							if(cell.data().solved === true || cell.data().solved === undefined){
-								//if reached same column, iterate down.
+								// If reached same column, iterate down.
 								if(cordX === second.x){
-									//when we iterate down we change cordY, cache it to prevent infinite loop
+									// When we iterate down we change cordY, cache it to prevent infinite loop
 									tempY = cordY;
-									//while we haven't moved down far enough
+									// While we haven't moved down far enough
 									while (cordY < second.y){
-										cordY++; //move down
+										cordY++; // Move down
 										console.log("moved down to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-										//if we reached the same x and y position, solved
+										// If we reached the same x and y position, solved
 										if(cordY === second.y) {
 											console.log("MATCH!!!! via Case A");
 											solved = true;
 											break;
 										}
-										//else if cell we just went to is occupied, break
+										// Else if cell we just went to is occupied, break
 										else if (cell.data().solved === false){
 											console.log("no match;");
 											break;
 										}
-									}//third while
-									//reset to same cordY before going right and down.
+									}// Third while
+									// Reset to same cordY before going right and down.
 									cordY = tempY;
 								}	
 							}
-							//else column moved to the right is occupied
+							// Else column moved to the right is occupied
 							else
 								break;
 							
-						}//2nd while
-						//reset cordX since iterated to new cordY
+						}// 2nd while
+						// Reset cordX since iterated to new cordY
 						cordX = first.x;
 					}
-					//else the cell above is occupied, break
+					// Else the cell above is occupied, break
 					else
 						break;
-				}//first while
+				}// First while
 			}// ---- CASE A ----
 
 			// *********    CASE B    **********   
@@ -373,17 +414,17 @@ var app = {
 				init();
 
 
-				//while we haven't reached the bottom of the board
+				// While we haven't reached the bottom of the board
 				while (cordY < 12 && solved !== true) {
-					cordY++;//move down 1 row
+					cordY++;// Move down 1 row
 					console.log("moved down to:("+cordX+","+cordY+")");
-					//get the new cell that we moved to.
+					// Get the new cell that we moved to.
 					cell = $('#'+app.getId(cordX,cordY));
-					//if the cell just moved down to is empty
+					// If the cell just moved down to is empty
 					if (cell.data().solved === true || cell.data().solved === undefined){
-						//while we haven't reached the same column
+						// While we haven't reached the same column
 						while(cordX < second.x) {
-							cordX++; //move right 1 column
+							cordX++; //move right  M column
 							console.log("moved right to:("+cordX+","+cordY+")");
 							cell = $('#'+app.getId(cordX,cordY));
 							//if we have moved down and right to the location
@@ -392,45 +433,45 @@ var app = {
 								solved = true;
 								break;
 							}
-							//if the column we just moved to is not occupied
+							// If the column we just moved to is not occupied
 							if(cell.data().solved === true || cell.data().solved === undefined){
-								//if reached same column, iterate up.
+								// If reached same column, iterate up.
 								if(cordX === second.x){
-									//when we iterate up we change cordY, cache it to prevent infinite loop
+									// When we iterate up we change cordY, cache it to prevent infinite loop
 									tempY = cordY;
-									//while we haven't moved up far enough
+									// While we haven't moved up far enough
 									while (cordY > second.y){
-										cordY--; //move up
+										cordY--; // Move up
 										console.log("moved up to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-										//if we reached the same x and y position, solved
+										// If we reached the same x and y position, solved
 										if(cordY === second.y) {
 											console.log("MATCH!!!! via Case B");
 											solved = true;
 											break;
 										}
-										//else if cell we just went to is occupied, break
+										// Else if cell we just went to is occupied, break
 										else if (cell.data().solved === false){
 											console.log("no match;");
 											break;
 										}
-									}//third while
-									//reset to same cordY before going right and up.
+									}// Third while
+									// Reset to same cordY before going right and up.
 									cordY = tempY;
 								}	
 							}
-							//else column moved to the right is occupied
+							// Else column moved to the right is occupied
 							else
 								break;
 							
-						}//2nd while
-						//reset cordX since iterated to new cordY
+						}// 2nd while
+						// Reset cordX since iterated to new cordY
 						cordX = first.x;
 					}
-					//else the cell above is occupied, break
+					// Else the cell above is occupied, break
 					else
 						break;
-				}//first while	
+				}// First while	
 
 			}// ---- CASE B ----
 
@@ -480,7 +521,7 @@ var app = {
 										cordX--; // Move left
 										console.log("moved left to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-										//if we reached the same x and y position, solved
+										// If we reached the same x and y position, solved
 										if(cordX === second.x) {
 											console.log("MATCH!!!! via Case C");
 											solved = true;
@@ -552,7 +593,7 @@ var app = {
 										cordX++; // Move right
 										console.log("moved right to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-										//if we reached the same x and y position, solved
+										// If we reached the same x and y position, solved
 										if(cordX === second.x) {
 											console.log("MATCH!!!! via Case D");
 											solved = true;
@@ -603,15 +644,15 @@ var app = {
 
 				//while we haven't reached the top of the board
 				while (cordY > 1 && solved !== true) {
-					cordY--;//move up 1 row
+					cordY--;//move up  M row
 					console.log("moved up to:("+cordX+","+cordY+")");
-					//get the new cell that we moved to.
+					// Get the new cell that we moved to.
 					cell = $('#'+app.getId(cordX,cordY));
 					//if the cell just moved up to is empty
 					if (cell.data().solved === true || cell.data().solved === undefined){
-						//while we haven't reached the same column
+						// While we haven't reached the same column
 						while(cordX > second.x) {
-							cordX--; //move left 1 column
+							cordX--; //move left  M column
 							console.log("moved left to:("+cordX+","+cordY+")");
 							cell = $('#'+app.getId(cordX,cordY));
 							//if we have moved up and left to the location
@@ -620,7 +661,7 @@ var app = {
 								solved = true;
 								break;
 							}
-							//if the column we just moved to is not occupied
+							// If the column we just moved to is not occupied
 							if(cell.data().solved === true || cell.data().solved === undefined){
 								//if reached same column, iterate down.
 								if(cordX === second.x){
@@ -628,37 +669,37 @@ var app = {
 									tempY = cordY;
 									//while we haven't moved down far enough
 									while (cordY < second.y){
-										cordY++; //move down
+										cordY++; // Move down
 										console.log("moved down to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-										//if we reached the same x and y position, solved
+										// If we reached the same x and y position, solved
 										if(cordY === second.y) {
 											console.log("MATCH!!!! via Case E");
 											solved = true;
 											break;
 										}
-										//else if cell we just went to is occupied, break
+										// Else if cell we just went to is occupied, break
 										else if (cell.data().solved === false){
 											console.log("no match;");
 											break;
 										}
-									}//third while
-									//reset to same cordY before going left and down.
+									}// Third while
+									// Reset to same cordY before going left and down.
 									cordY = tempY;
 								}	
 							}
-							//else column moved to the left is occupied
+							// Else column moved to the left is occupied
 							else
 								break;
 							
-						}//2nd while
-						//reset cordX since iterated to new cordY
+						}// 2nd while
+						// Reset cordX since iterated to new cordY
 						cordX = first.x;
 					}
-					//else the cell above is occupied, break
+					// Else the cell above is occupied, break
 					else
 						break;
-				}//first while
+				}// First while
 			}// ---- CASE E ----
 
 			// *********    CASE F    **********   
@@ -672,17 +713,17 @@ var app = {
 				init();
 
 
-				//while we haven't reached the bottom of the board
+				// While we haven't reached the bottom of the board
 				while (cordY < 12 && solved !== true) {
-					cordY++;//move down 1 row
+					cordY++;// Move down 1 row
 					console.log("moved down to:("+cordX+","+cordY+")");
-					//get the new cell that we moved to.
+					// Get the new cell that we moved to.
 					cell = $('#'+app.getId(cordX,cordY));
-					//if the cell just moved down to is empty
+					// If the cell just moved down to is empty
 					if (cell.data().solved === true || cell.data().solved === undefined){
-						//while we haven't reached the same column
+						// While we haven't reached the same column
 						while(cordX > second.x) {
-							cordX--; //move left 1 column
+							cordX--; //move left  M column
 							console.log("moved left to:("+cordX+","+cordY+")");
 							cell = $('#'+app.getId(cordX,cordY));
 							//if we have moved down and left to the location
@@ -691,45 +732,45 @@ var app = {
 								solved = true;
 								break;
 							}
-							//if the column we just moved to is not occupied
+							// If the column we just moved to is not occupied
 							if(cell.data().solved === true || cell.data().solved === undefined){
-								//if reached same column, iterate up.
+								// If reached same column, iterate up.
 								if(cordX === second.x){
-									//when we iterate up we change cordY, cache it to prevent infinite loop
+									// When we iterate up we change cordY, cache it to prevent infinite loop
 									tempY = cordY;
-									//while we haven't moved up far enough
+									// While we haven't moved up far enough
 									while (cordY > second.y){
-										cordY--; //move up
+										cordY--; // Move up
 										console.log("moved up to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-										//if we reached the same x and y position, solved
+										// If we reached the same x and y position, solved
 										if(cordY === second.y) {
 											console.log("MATCH!!!! via Case F");
 											solved = true;
 											break;
 										}
-										//else if cell we just went to is occupied, break
+										// Else if cell we just went to is occupied, break
 										else if (cell.data().solved === false){
 											console.log("no match;");
 											break;
 										}
-									}//third while
-									//reset to same cordY before going left and up.
+									}// Third while
+									// Reset to same cordY before going left and up.
 									cordY = tempY;
 								}	
 							}
-							//else column moved to the left is occupied
+							// Else column moved to the left is occupied
 							else
 								break;
 							
-						}//2nd while
-						//reset cordX since iterated to new cordY
+						}// 2nd while
+						// Reset cordX since iterated to new cordY
 						cordX = first.x;
 					}
-					//else the cell above is occupied, break
+					// Else the cell above is occupied, break
 					else
 						break;
-				}//first while	
+				}// First while	
 
 			}// ---- CASE F ----
 
@@ -779,7 +820,7 @@ var app = {
 										cordX--; // Move left
 										console.log("moved left to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-										//if we reached the same x and y position, solved
+										// If we reached the same x and y position, solved
 										if(cordX === second.x) {
 											console.log("MATCH!!!! via Case G");
 											solved = true;
@@ -850,7 +891,7 @@ var app = {
 										cordX++; // Move right
 										console.log("moved right to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
-										//if we reached the same x and y position, solved
+										// If we reached the same x and y position, solved
 										if(cordX === second.x) {
 											console.log("MATCH!!!! via Case H");
 											solved = true;
@@ -945,7 +986,7 @@ var app = {
 									tempX = cordX;
 									// While we haven't moved far enough right
 									while (cordX < second.x) {
-										cordX++; //move right
+										cordX++; // Move right
 										console.log("moved right to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
@@ -967,7 +1008,7 @@ var app = {
 						// Reset y cord after iterating up and right
 						cordY = first.y;
 					}
-					//else the cell to the right is occupied
+					// Else the cell to the right is occupied
 					else
 						break;
 
@@ -1012,7 +1053,7 @@ var app = {
 									tempX = cordX;
 									// While we haven't moved far enough right
 									while (cordX < second.x) {
-										cordX++; //move right
+										cordX++; // Move right
 										console.log("moved right to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
@@ -1034,7 +1075,7 @@ var app = {
 						// Reset y cord after iterating down and right
 						cordY = first.y;
 					}
-					//else the cell to the right is occupied
+					// Else the cell to the right is occupied
 					else
 						break;
 
@@ -1083,7 +1124,7 @@ var app = {
 									tempY = cordY;
 									// While we haven't moved far enough up
 									while (cordY > second.y) {
-										cordY--; //move up
+										cordY--; // Move up
 										console.log("moved up to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
@@ -1105,7 +1146,7 @@ var app = {
 						// Reset x cord after iterating right and up
 						cordX = first.x;
 					}
-					//else the cell up is occupied
+					// Else the cell up is occupied
 					else
 						break;
 
@@ -1151,7 +1192,7 @@ var app = {
 									tempY = cordY;
 									// While we haven't moved far enough up
 									while (cordY > second.y) {
-										cordY--; //move up
+										cordY--; // Move up
 										console.log("moved up to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
@@ -1173,7 +1214,7 @@ var app = {
 						// Reset x cord after iterating left and up
 						cordX = first.x;
 					}
-					//else the cell up is occupied
+					// Else the cell up is occupied
 					else
 						break;
 
@@ -1220,7 +1261,7 @@ var app = {
 									tempX = cordX;
 									// While we haven't moved far enough left
 									while (cordX > second.x) {
-										cordX--; //move left
+										cordX--; // Move left
 										console.log("moved left to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
@@ -1242,7 +1283,7 @@ var app = {
 						// Reset y cord after iterating up and left
 						cordY = first.y;
 					}
-					//else the cell to the left is occupied
+					// Else the cell to the left is occupied
 					else
 						break;
 
@@ -1286,7 +1327,7 @@ var app = {
 									tempX = cordX;
 									// While we haven't moved far enough left
 									while (cordX > second.x) {
-										cordX--; //move left
+										cordX--; // Move left
 										console.log("moved left to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
@@ -1308,7 +1349,7 @@ var app = {
 						// Reset y cord after iterating down and left
 						cordY = first.y;
 					}
-					//else the cell to the left is occupied
+					// Else the cell to the left is occupied
 					else
 						break;
 
@@ -1357,7 +1398,7 @@ var app = {
 									tempY = cordY;
 									// While we haven't moved far enough down
 									while (cordY < second.y) {
-										cordY++; //move down
+										cordY++; // Move down
 										console.log("moved down to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
@@ -1379,7 +1420,7 @@ var app = {
 						// Reset x cord after iterating right and down
 						cordX = first.x;
 					}
-					//else the cell down is occupied
+					// Else the cell down is occupied
 					else
 						break;
 
@@ -1427,7 +1468,7 @@ var app = {
 									tempY = cordY;
 									// While we haven't moved far enough down
 									while (cordY < second.y) {
-										cordY++; //move down
+										cordY++; // Move down
 										console.log("moved down to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
@@ -1449,7 +1490,7 @@ var app = {
 						// Reset x cord after iterating left and down
 						cordX = first.x;
 					}
-					//else the cell down is occupied
+					// Else the cell down is occupied
 					else
 						break;
 
