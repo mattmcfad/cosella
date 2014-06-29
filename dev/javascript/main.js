@@ -8,6 +8,7 @@
  *  app.second       - Object containing Data of second cell selected
  *  app.score		 - Int Score in game
  *  app.gamePaused   - Boolean is the game paused.
+ *	app.count        - Int time remaining in game
  */
 
 
@@ -21,12 +22,21 @@ var app = {
 
 
 
+		// 120 seconds
+		app.count = 120000;
+		$('#countdown').html(formatTime(app.count));
+
+
 		//Initialize score
 		app.score = 0; 	
+
+		$('.totscore').html(app.score);
 
 		app.gamePaused = false;	
 
 		app.totCells = 144;
+
+		// Start at level 1
 		app.currentLevel = 1;
 		var gamegrid = $('#gamegrid');
 
@@ -100,10 +110,16 @@ var app = {
 				closeModal();
 		});
 
+		// Game Over
+
+		$('#playAgain').on('click', function(){
+			app.restartGame();
+		});
+
 		// Footer buttons
 
 		$('#moreTime').on("click", function(){
-			count += 10000;
+			app.count += 10000;
 		});
 
 		$("#instruct").on("click", function(){
@@ -286,8 +302,8 @@ var app = {
 
 		if (app.totSolved === app.totIcons) {
 			timer.stop();
-			count = 115000;
-			$('#countdown').html(formatTime(count));
+			app.count = 115000;
+			$('#countdown').html(formatTime(app.count));
 			console.log("win");
 			// if you beat level 4 keep playing it
 			if (app.currentLevel !== 4 )
@@ -312,7 +328,16 @@ var app = {
 	},
 
 	restartGame: function() {
+		// Reset Divs
+		$('#gamegrid').html('');
+		
+
+		timer.pause();
+		
+
 		app.init();
+		app.eventListeners();
+
 		$('#timesUp').fadeOut();
 	}
 

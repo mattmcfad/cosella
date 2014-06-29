@@ -319,6 +319,7 @@ a {
   border: 3px #2c3e50 solid;
   border-radius: 5px;
   padding: 40px;
+  padding-top: 0;
 }
 .gamebox .header {
   margin: inherit;

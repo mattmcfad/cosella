@@ -1,16 +1,15 @@
 
 
-// 120 seconds
-var count = 115000;
 var timer = $.timer(function() {
-    $('#countdown').html(formatTime(count));
+    $('#countdown').html(formatTime(app.count));
 
-    if (count === 0){
+    if (app.count === 0){
     	timer.stop();
     	app.gameOver();
     }
-    count -= 10;
-    if (count < 0) count = 0;
+    app.count -= 10;
+    if (app.count < 0) 
+    	app.count = 0;
 
 });
 
