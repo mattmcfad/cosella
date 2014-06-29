@@ -19,7 +19,26 @@ a {
 	border-radius: 5px;
 	padding: 40px;
 
+
+	.header {
+		margin: inherit;
+		width: 600px;
+		h2 {
+			width: 50%;
+			float: left;
+
+			&#time {
+				text-align: left;
+			}
+
+			&#score {
+				text-align: right;
+			}
+		}
+	}
+
 	.gamegrid {
+		margin: inherit;
 		width: 606px;
 		height: 606px;
 		border: inherit;

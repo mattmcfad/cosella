@@ -223,7 +223,22 @@ a {
   border-radius: 5px;
   padding: 40px;
 }
+.gamebox .header {
+  margin: inherit;
+  width: 600px;
+}
+.gamebox .header h2 {
+  width: 50%;
+  float: left;
+}
+.gamebox .header h2#time {
+  text-align: left;
+}
+.gamebox .header h2#score {
+  text-align: right;
+}
 .gamebox .gamegrid {
+  margin: inherit;
   width: 606px;
   height: 606px;
   border: inherit;
@@ -235,9 +250,42 @@ a {
   border: 1px solid #2c3e50;
 }
 
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.overlay#instructions {
+  display: block;
+}
+.overlay .modal {
+  position: relative;
+  width: 450px;
+  height: 235px;
+  background: white;
+  border-radius: 2px;
+  -webkit-box-shadow: -5px 5px 0 #2c3e50;
+          box-shadow: -5px 5px 0 #2c3e50;
+  margin: 160px auto;
+  padding: 20px;
+  text-align: center;
+  padding: 50px;
+}
+.overlay .modal img.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
 h1 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   margin: 0 auto;
   text-align: center;
+  font-size: 48px;
 }
