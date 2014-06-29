@@ -34,7 +34,7 @@ var app = {
 
 	eventListeners: function(){
 		
-		var select; // Test if selected
+		var select = false; // Test if selected
 
 		$('.cell').on('click', function(event){
 				
@@ -90,24 +90,24 @@ var app = {
 
 			switch(level) {
 				case 1: 
+					start = 40;
+					rows = 6;
+					columns = 6;
+					break;
+				case 2:
 					start = 27;
 					rows = 8;
 					columns = 8;
 					break;
-				case 2:
+				case 3:
+					start = 26;
+					rows = 8;
+					columns = 10;
+					break;
+				case 4:
 					start = 14;
 					rows = 10;
 					columns = 10;
-					break;
-				case 3:
-					start = 13;
-					rows = 10;
-					columns = 12;
-					break;
-				case 4:
-					start = 1;
-					rows = 12;
-					columns = 12;
 					break;
 			}
 
