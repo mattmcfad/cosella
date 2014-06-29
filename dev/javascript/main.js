@@ -7,6 +7,7 @@
  *  app.First        - Object containing Data of first cell selected
  *  app.second       - Object containing Data of second cell selected
  *  app.score		 - Int Score in game
+ *  app.gamePaused   - Boolean is the game paused.
  */
 
 
@@ -18,8 +19,12 @@ var app = {
 		// Initialize timer
 		timer.set({ time : 10, autostart : false });
 
+
+
 		//Initialize score
-		app.score = 0; 		
+		app.score = 0; 	
+
+		app.gamePaused = false;	
 
 		app.totCells = 144;
 		app.currentLevel = 1;
@@ -43,10 +48,13 @@ var app = {
 		
 		var select = false; // Test if selected
 
+		// Clicking on a cell
+
 		$('.cell').on('click', function(event){
 				
 			event.preventDefault();
 
+			// Make sure timer is running
 			if (!timer.isActive){
 				timer.play(true);
 			}
@@ -70,7 +78,13 @@ var app = {
 			}
 		});
 
+
+		// Modal functionality
+
 		function closeModal() {
+			if (app.gamePaused === true){
+				timer.play();
+			}
 			$(".overlay").fadeOut();
 		}
 
@@ -85,6 +99,21 @@ var app = {
 			if(e.which == 27) 
 				closeModal();
 		});
+
+		// Footer buttons
+
+		$('#moreTime').on("click", function(){
+			count += 10000;
+		});
+
+		$("#instruct").on("click", function(){
+			app.instructions();
+		});
+
+		$('#reOrder').on("click", function(){
+			app.reOrder();
+		});
+
 
 	},// eventListeners
 
@@ -215,7 +244,7 @@ var app = {
 
 	increaseScore: function(){
 		app.score += 10;
-		$('#totscore').html(app.score);
+		$('.totscore').html(app.score);
 	},
 
 	checkMatch: function(){
@@ -267,9 +296,25 @@ var app = {
 		}
 	},
 
-	gameOver: function() {
+	reOrder: function() {
 
-	} 
+	},
+
+	instructions: function() {
+		app.gamePaused = true;
+		timer.pause();
+		$('#instructions').fadeIn();
+	},
+
+	gameOver: function() {
+		$('#timesUp').fadeIn();
+
+	},
+
+	restartGame: function() {
+		app.init();
+		$('#timesUp').fadeOut();
+	}
 
 }; // app
 

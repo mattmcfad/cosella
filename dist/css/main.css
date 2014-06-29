@@ -259,6 +259,13 @@ footer button {
   height: 250px;
   padding: 10px;
 }
+.overlay .modal .case p {
+  margin: 0 auto;
+  width: 80%;
+}
+.overlay .modal .case #case1, .overlay .modal .case #case2 {
+  margin-top: 50px;
+}
 .overlay .modal .case img#case1 {
   width: 143px;
   height: 101px;
@@ -286,6 +293,10 @@ h1 {
   margin: 0 auto;
   text-align: center;
   font-size: 48px;
+}
+
+h3 {
+  font-size: 32px;
 }
 
 a {
@@ -323,7 +334,7 @@ a {
 .gamebox .header h2#score {
   text-align: right;
 }
-.gamebox .header h2 p {
+.gamebox .header h2 p, .gamebox .header h2 #totscore {
   display: inline;
 }
 .gamebox .gamegrid {

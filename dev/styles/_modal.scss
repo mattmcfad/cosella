@@ -28,6 +28,15 @@
       height: 250px;
       padding: 10px;
 
+      p {
+        @include m0;
+        width: 80%;
+      }
+
+      #case1, #case2 {
+        margin-top: 50px;
+      }
+
       img#case1{
         width: 143px;
         height: 101px;
