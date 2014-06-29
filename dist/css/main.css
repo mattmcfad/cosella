@@ -222,6 +222,12 @@ button:hover, button:focus {
   border-bottom: 0;
 }
 
+footer button {
+  display: inline;
+  width: 200px;
+  margin: 19px;
+}
+
 .overlay {
   display: none;
   position: fixed;
