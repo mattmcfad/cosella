@@ -20,16 +20,74 @@ var app = {
 
 	buildIcons: function(level){
 
+		var distribution = new Array(icons.length), totDistributed = 0;
+		var icon;
+		var odd;
+
+
+		function init(){
+
+
+			for (var k = 0; k < icons.length; k++) {
+				distribution[k] = 0;
+			}
+
+
+
+
+		}
+
+
 		if (level === 1) {
-			
-			var start = 27, sum; 
+
+
+			init();
+			//starting id, calculated id
+			var start = 27, sum;
+			var rows = 8, columns = 8;
+			var totalOutput =  rows * columns;
 			var selector = '#';
 
-			for (var i = 0; i < 8; i++) {
-				for(var j = 0; j < 8; j++){
-					sum = start + i + j*12;
+
+			for (var i = 0; i < rows; i++) {
+				for(var j = 0; j < columns; j++){
+					sum = start + i + j*12; //id on grid
 					var sel = $(selector+sum);
-					var color = app.getColor();
+					
+					//
+			
+				
+
+					//ensure everything has a match
+					if (totalOutput - totDistributed <= icons.length){
+
+						odd = false;
+						
+						//iterate through distribution and test to see what is odd
+						for (var k = 0; k < distribution.length; k++){
+
+							//if odd number distributed, get that icon to even out
+							if (distribution[k] % 2 === 1 ){
+								icon = icons[k];
+								
+								odd = true;
+								break;
+							}
+						}
+
+						if (odd === false)
+							icon = app.getIcon();
+					}
+
+					else 
+						icon = app.getIcon();
+
+					distribution[icon.id]++;
+
+					totDistributed++;
+					
+
+					var color = icon.color;
 					sel.css('background-color',color);
 					sel.data('id',color);
 					sel.data('solved',false);
@@ -40,9 +98,9 @@ var app = {
 		}	
 	},
 
-	getColor: function() {
+	getIcon: function() {
 		var rand = Math.floor((Math.random() * (icons.length)));
-		return icons[rand].color;
+		return icons[rand];
 	},
 	//if id % 12 = 0 then on 12th column, return 12, else return id % 12
 	getX: function(id) {
