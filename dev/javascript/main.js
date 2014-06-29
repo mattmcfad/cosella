@@ -18,7 +18,7 @@ var app = {
 		app.currentLevel = 1;
 		var gamegrid = $('#gamegrid');
 
-		var cellStart = '<div class=cell style="background-color: rgb(0,0,0)" id=';
+		var cellStart = '<div class=cell style="background-color: rgb(189,195,199)" id=';
 		var cellEnd = "></div>";
 		var cellHTML = '';
 
@@ -67,6 +67,12 @@ var app = {
 			if ($(this).hasClass("close")) {
 				closeModal();
 			}
+		});
+
+		$(document).on("keydown", function(e){
+			// ESC 
+			if(e.which == 27) 
+				closeModal();
 		});
 
 	},// eventListeners
@@ -219,8 +225,8 @@ var app = {
 		cell1.data('id',null);
 		cell2.data('solved',true);
 		cell2.data('id',null);
-		cell1.css('background-color','black');
-		cell2.css('background-color','black');
+		cell1.css('background-color','rgb(189,195,199)');
+		cell2.css('background-color','rgb(189,195,199)');
 
 		// Just matched two squares.
 		app.totSolved = app.totSolved + 2;

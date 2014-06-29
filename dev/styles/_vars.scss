@@ -1,5 +1,11 @@
 $blue: #3498db;
 $black: #2c3e50;
+$white: #ecf0f1;
+$gray: #bdc3c7;
+
+
+$accent: #e74c3c;
+$accenta: darken($accent, 80%);
 
 
 
@@ -20,4 +26,22 @@ $sans: 'Montserrat', sans-serif;
 @mixin helvlight {
 	font-family: $helv;
 	font-weight: 300;
+}
+
+@mixin bigboys {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+@mixin stylishButton {
+  @include bigboys;
+  padding: 6px 9px;
+  border-radius: 2px;
+  height: 45px;
+  display: block;
+  width: 100%;
+}
+
+@mixin undoDefault{
+  outline: none
 }

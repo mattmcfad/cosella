@@ -202,6 +202,86 @@ img {
   max-width: 100%;
 }
 
+button {
+  background: #e74c3c;
+  border: 0;
+  border-bottom: 4px solid black;
+  color: #ecf0f1;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 6px 9px;
+  border-radius: 2px;
+  height: 45px;
+  display: block;
+  width: 100%;
+}
+button:hover, button:focus {
+  outline: none;
+  border-bottom: 0;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.overlay#instructions {
+  display: block;
+}
+.overlay .modal {
+  position: relative;
+  width: 800px;
+  height: 800px;
+  background: white;
+  border-radius: 2px;
+  -webkit-box-shadow: -5px 5px 0 #2c3e50;
+          box-shadow: -5px 5px 0 #2c3e50;
+  margin: 55px auto;
+  padding: 20px;
+  text-align: center;
+  padding: 50px;
+}
+.overlay .modal .case {
+  float: left;
+  width: 50%;
+  height: 250px;
+  padding: 10px;
+}
+.overlay .modal .case img#case1 {
+  width: 143px;
+  height: 101px;
+  background-image: url(../images/case1.png);
+}
+.overlay .modal .case img#case2 {
+  width: 128px;
+  height: 101px;
+  background-image: url(../images/case4.png);
+}
+.overlay .modal .case img#case3 {
+  width: 139px;
+  height: 105px;
+  background-image: url(../images/case2.png);
+}
+.overlay .modal .case img#case4 {
+  width: 140px;
+  height: 105px;
+  background-image: url(../images/case3.png);
+}
+
+h1 {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 48px;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -212,7 +292,7 @@ a {
   max-width: 1000px;
   min-width: 800px;
   height: 900px;
-  background-color: #3498db;
+  background-color: #ecf0f1;
 }
 
 .gamebox {
@@ -248,44 +328,4 @@ a {
   height: 50px;
   float: left;
   border: 1px solid #2c3e50;
-}
-
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.6);
-}
-.overlay#instructions {
-  display: block;
-}
-.overlay .modal {
-  position: relative;
-  width: 450px;
-  height: 235px;
-  background: white;
-  border-radius: 2px;
-  -webkit-box-shadow: -5px 5px 0 #2c3e50;
-          box-shadow: -5px 5px 0 #2c3e50;
-  margin: 160px auto;
-  padding: 20px;
-  text-align: center;
-  padding: 50px;
-}
-.overlay .modal img.close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-}
-
-h1 {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 48px;
 }
