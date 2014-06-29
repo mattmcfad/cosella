@@ -110,6 +110,13 @@ var app = {
 				closeModal();
 		});
 
+		// Next level
+
+		$('#nextLvl').on('click', function(){
+			$('#nextLevel').fadeOut();
+			app.buildIcons(app.currentLevel);
+		});
+
 		// Game Over
 
 		$('#playAgain').on('click', function(){
@@ -129,6 +136,7 @@ var app = {
 		$('#reOrder').on("click", function(){
 			app.reOrder();
 		});
+
 
 
 	},// eventListeners
@@ -308,8 +316,14 @@ var app = {
 			// if you beat level 4 keep playing it
 			if (app.currentLevel !== 4 )
 				app.currentLevel++;
-			app.buildIcons(app.currentLevel);
+
+			app.nextLevel();
+			
 		}
+	},
+
+	nextLevel: function() {
+		$('#nextLevel').fadeIn();
 	},
 
 	reOrder: function() {
