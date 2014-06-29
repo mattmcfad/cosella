@@ -286,6 +286,10 @@ footer button {
   height: 105px;
   background-image: url(../images/case3.png);
 }
+.overlay .modal #octocat {
+  width: 75%;
+  height: 75%;
+}
 
 h1 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;

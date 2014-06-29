@@ -51,6 +51,9 @@ var app = {
 			cellHTML = cellStart;
 		}
 
+		// Array to keep track of which Octocats have been used
+		app.octocatTracker = Array();
+
 		app.buildIcons(app.currentLevel);
 	},
 
@@ -247,6 +250,16 @@ var app = {
 		return icons[rand];
 	},
 
+	getOctocat: function() {
+		var rand = Math.floor((Math.random() * (octocats.length)));
+		if (!app.octocatTracker.contains(rand)){
+			app.octocatTracker.push(rand);
+			return octocats[rand].img;
+		}
+		else
+			return getOctocat();
+	},
+
 	// If id % 12 = 0 then on 12th column, return 12, else return id % 12
 	// @param id - represents an position on the grid from 1-144
 	// @return int - An x coordinate representing which column the icon is on 
@@ -324,6 +337,9 @@ var app = {
 
 	nextLevel: function() {
 		$('#nextLevel').fadeIn();
+		var image = '../images/octocats/' + app.getOctocat();
+		
+		$('#octocat').attr('src',image);
 	},
 
 	reOrder: function() {
@@ -362,4 +378,13 @@ $(document).ready(function(){
 	app.init();
 	app.eventListeners();
 
+	app.nextLevel();
+
 });
+
+Array.prototype.contains = function ( needle ) {
+		for (var i in this) {
+			if (this[i] == needle) return true;
+		}
+		return false;
+};
