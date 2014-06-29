@@ -6,5 +6,5 @@ var case0 = {
 		if (first.solved === true || second.solved === true)
 			return false;
 		return (first.id === second.id) ? true : false;
-	},
+	}
 };
