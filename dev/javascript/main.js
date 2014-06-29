@@ -198,7 +198,7 @@ var app = {
 	checkMatch: function(){
 		
 		// If they are both the same icon
-		if (app.case0(app.first,app.second) === true){
+		if (case0.test(app.first,app.second) === true){
 			// If they are both on same X or Y axis
 			if (app.case1(app.first,app.second) === false)
 				// If they can be matched through U or L shaped paths
@@ -232,7 +232,9 @@ var app = {
 
 		if (app.totSolved === app.totIcons) {
 			console.log("win");
-			app.currentLevel++;
+			// if you beat level 4 keep playing it
+			if (app.currentLevel !== 4 )
+				app.currentLevel++;
 			app.buildIcons(app.currentLevel);
 		}
 	},
@@ -1029,7 +1031,11 @@ var app = {
 											solved = true;
 											break;
 										}
-
+										// Else if cell we just went to is occupied, break
+										else if (cell.data().solved === false){
+											console.log("no match via I");
+											break;
+										}
 									}// Third while
 									// Reset to same cordX before going right and up
 									cordX = tempX;				
@@ -1096,7 +1102,11 @@ var app = {
 											solved = true;
 											break;
 										}
-
+										// Else if cell we just went to is occupied, break
+										else if (cell.data().solved === false){
+											console.log("no match via J");
+											break;
+										}
 									}// Third while
 									// Reset to same cordX before going right and down
 									cordX = tempX;				
@@ -1167,7 +1177,11 @@ var app = {
 											solved = true;
 											break;
 										}
-
+										// Else if cell we just went to is occupied, break
+										else if (cell.data().solved === false){
+											console.log("no match via K");
+											break;
+										}
 									}// Third while
 									// Reset to same cordY before going up and right
 									cordY = tempY;				
@@ -1235,7 +1249,11 @@ var app = {
 											solved = true;
 											break;
 										}
-
+										// Else if cell we just went to is occupied, break
+										else if (cell.data().solved === false){
+											console.log("no match via L");
+											break;
+										}
 									}// Third while
 									// Reset to same cordY before going up and left
 									cordY = tempY;				
@@ -1304,7 +1322,11 @@ var app = {
 											solved = true;
 											break;
 										}
-
+										// Else if cell we just went to is occupied, break
+										else if (cell.data().solved === false){
+											console.log("no match via M");
+											break;
+										}
 									}// Third while
 									// Reset to same cordX before going left and up
 									cordX = tempX;				
@@ -1370,7 +1392,11 @@ var app = {
 											solved = true;
 											break;
 										}
-
+										// Else if cell we just went to is occupied, break
+										else if (cell.data().solved === false){
+											console.log("no match via I");
+											break;
+										}
 									}// Third while
 									// Reset to same cordX before going left and down
 									cordX = tempX;				
@@ -1441,7 +1467,11 @@ var app = {
 											solved = true;
 											break;
 										}
-
+										// Else if cell we just went to is occupied, break
+										else if (cell.data().solved === false){
+											console.log("no match via I");
+											break;
+										}
 									}// Third while
 									// Reset to same cordY before going down and right
 									cordY = tempY;				
@@ -1511,7 +1541,11 @@ var app = {
 											solved = true;
 											break;
 										}
-
+										// Else if cell we just went to is occupied, break
+										else if (cell.data().solved === false){
+											console.log("no match via I");
+											break;
+										}
 									}// Third while
 									// Reset to same cordY before going down and left
 									cordY = tempY;				
