@@ -55,7 +55,7 @@ var case3 = {
 										console.log("moved right to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
-										if (cordX === second.x) {
+										if (cordX === second.x && cordY === second.y) {
 											console.log("Match! via Case I");
 											solved = true;
 											break;
@@ -126,7 +126,7 @@ var case3 = {
 										console.log("moved right to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
-										if (cordX === second.x) {
+										if (cordX === second.x && cordY === second.y) {
 											console.log("Match! via Case J");
 											solved = true;
 											break;
@@ -201,7 +201,7 @@ var case3 = {
 										console.log("moved up to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
-										if (cordX === second.x) {
+										if (cordX === second.x && cordY === second.y) {
 											console.log("Match! via Case K");
 											solved = true;
 											break;
@@ -273,7 +273,7 @@ var case3 = {
 										console.log("moved up to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
-										if (cordX === second.x) {
+										if (cordX === second.x && cordY === second.y) {
 											console.log("Match! via Case L");
 											solved = true;
 											break;
@@ -346,7 +346,7 @@ var case3 = {
 										console.log("moved left to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
-										if (cordX === second.x) {
+										if (cordX === second.x && cordY === second.y) {
 											console.log("Match! via Case M");
 											solved = true;
 											break;
@@ -416,14 +416,14 @@ var case3 = {
 										console.log("moved left to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
-										if (cordX === second.x) {
+										if (cordX === second.x && cordY === second.y) {
 											console.log("Match! via Case N");
 											solved = true;
 											break;
 										}
 										// Else if cell we just went to is occupied, break
 										else if (cell.data().solved === false){
-											console.log("no match via I");
+											console.log("no match via N");
 											break;
 										}
 									}// Third while
@@ -491,14 +491,14 @@ var case3 = {
 										console.log("moved down to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
-										if (cordX === second.x) {
+										if (cordX === second.x && cordY === second.y) {
 											console.log("Match! via Case O");
 											solved = true;
 											break;
 										}
 										// Else if cell we just went to is occupied, break
 										else if (cell.data().solved === false){
-											console.log("no match via I");
+											console.log("no match via O");
 											break;
 										}
 									}// Third while
@@ -565,14 +565,14 @@ var case3 = {
 										console.log("moved down to:("+cordX+","+cordY+")");
 										cell = $('#'+app.getId(cordX,cordY));
 										// If we reached the same x and y position, solved
-										if (cordX === second.x) {
+										if (cordX === second.x && cordY === second.y) {
 											console.log("Match! via Case P");
 											solved = true;
 											break;
 										}
 										// Else if cell we just went to is occupied, break
 										else if (cell.data().solved === false){
-											console.log("no match via I");
+											console.log("no match via P");
 											break;
 										}
 									}// Third while

@@ -38,30 +38,26 @@ var app = {
 
 		$('.cell').on('click', function(event){
 				
-				event.preventDefault();
+			event.preventDefault();
 
-				if (select === false){
-					select = true;
-					app.first = $(this).data();
-				} 
-				else {
+			if (select === false){
+				select = true;
+				app.first = $(this).data();
+			} 
+			else {
 
-					if ( app.getId( $(this).data().x,$(this).data().y) === app.getId( app.first.x, app.first.y) ){
-						console.log('no same onez1!!');
-						select = false;
-					}
-					else{
-						select = false;
-						app.second = $(this).data();
-
-						app.checkMatch();
-					}
+				if ( app.getId( $(this).data().x,$(this).data().y) === app.getId( app.first.x, app.first.y) ){
+					console.log('no same onez1!!');
+					select = false;
 				}
+				else{
+					select = false;
+					app.second = $(this).data();
 
+					app.checkMatch();
+				}
+			}
 		});
-
-
-
 	},
 
 	buildIcons: function(level){
@@ -77,7 +73,6 @@ var app = {
 		    start,          // Starting location of where to start drawing icons
 		    selector,       // String representing # for jQuery calls
 		    sum;            // Int that determines which id on board to target
-
 
 		function init(level){
 
@@ -235,8 +230,6 @@ var app = {
 	}, 
 
 }; // app
-
-
 
 $(document).ready(function(){
 	
