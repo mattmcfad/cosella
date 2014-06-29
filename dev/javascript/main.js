@@ -1,11 +1,12 @@
 
 /*	Global Variables
- *	app.totCells     - Total # of cells on board
- *  app.currentLevel - Current level (out of 4)
- *  app.totSolved    - Total # of solved Icons for current level
- *  app.totIcons     - Total # of Icons on board for current level
+ *	app.totCells     - Int Total # of cells on board
+ *  app.currentLevel - Int Current level (1 - 4)
+ *  app.totSolved    - Int Total # of solved Icons for current level
+ *  app.totIcons     - Int Total # of Icons on board for current level
  *  app.First        - Object containing Data of first cell selected
  *  app.second       - Object containing Data of second cell selected
+ *  app.score		 - Int Score in game
  */
 
 
@@ -14,8 +15,11 @@ var app = {
 
 	init: function(){
 		
-		// Start timer
+		// Initialize timer
 		timer.set({ time : 10, autostart : false });
+
+		//Initialize score
+		app.score = 0; 		
 
 		app.totCells = 144;
 		app.currentLevel = 1;
@@ -209,6 +213,11 @@ var app = {
 		return(x + 12 * (y-1));
 	},
 
+	increaseScore: function(){
+		app.score += 10;
+		$('#totscore').html(app.score);
+	},
+
 	checkMatch: function(){
 		
 		// If they are both the same icon
@@ -238,6 +247,8 @@ var app = {
 		// Just matched two squares.
 		app.totSolved = app.totSolved + 2;
 
+		app.increaseScore();
+
 		app.testLevelCompletion();
 
 	},
@@ -254,7 +265,11 @@ var app = {
 				app.currentLevel++;
 			app.buildIcons(app.currentLevel);
 		}
-	}, 
+	},
+
+	gameOver: function() {
+
+	} 
 
 }; // app
 
