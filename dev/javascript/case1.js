@@ -1,11 +1,10 @@
+//--------------------
+// Test if two cells are on same row or column
 var case1 = {
 	
-	// Two cells in either the same row or column
 	test: function(first,second) {
 		
 		var cordX = first.x, cordY = first.y, solved = false, cell;
-
-		/*************************/
 
 		// If they are both on same column
 		if (first.x === second.x) {

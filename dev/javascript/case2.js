@@ -1,10 +1,14 @@
+//--------------------
+// Test if a U shaped path has occurred
 var case2 = {
 
-	// U shapes
+	// U shape algorithm
 	test: function(first,second) {
 		var cordX = first.x, cordY = first.y, tempX, tempY, solved = false, cell;
 		//console.log("=================================");
 		
+		//--------------------
+		// initialize algorithm
 		function init() {
 			cordX = first.x; 
 			cordY = first.y;

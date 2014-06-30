@@ -331,8 +331,9 @@ footer .buttonHolder#inst {
 
 h1 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
+  font-weight: 700;
   margin: 10px auto;
+  margin-top: 22px;
   text-align: center;
   font-size: 48px;
   color: #e74c3c;

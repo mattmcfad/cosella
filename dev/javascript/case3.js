@@ -1,10 +1,14 @@
+//--------------------
+// Test if a Zig-Zag pattern has occurred
 var case3 = {
 
-	//Zig Zagz
+	//Zig Zagz Algorithm
 	test: function(first,second) {
 		var cordX = first.x, cordY = first.y, tempX, tempY, solved = false, cell;
 		//console.log("---------------------------------");
 		
+		//--------------------
+		// initialize algorithm
 		function init() {
 			cordX = first.x; 
 			cordY = first.y;

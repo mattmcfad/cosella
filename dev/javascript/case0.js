@@ -1,3 +1,5 @@
+//--------------------
+// Make sure cells are same icon
 var case0 = {
 
 	// Make sure both cells are actually same type of icon

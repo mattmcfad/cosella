@@ -9,43 +9,45 @@
  *  app.score		 - Int Score in game
  *  app.gamePaused   - Boolean is the game paused.
  *	app.count        - Int time remaining in game
+ *  app.timeLimit	 - Int total time in milliseconds allowed per level
  *  app.start        - Int starting id location on grid for current level
  *  app.rows         - Int # of rows for current level
  *  app.columns      - Int # of columns for current level
  */
 
-
-
+//--------------------
+// App - Main variable holding functions & variables for the game
 var app = {
 
+	//--------------------
+	// init - Initializes the environment for the game
 	init: function(){
+	
+		// 100 seconds per level
+		//--------------------
+		app.timeLimit = 100000;
 		
+		// Initialize Timer counter
+		//--------------------
+		app.count = app.timeLimit;
+		$('#countdown').html(formatTime(app.count));
 		// Initialize timer
 		timer.set({ time : 10, autostart : false });
 
-
-
-		// 100 seconds
-		app.timeLimit = 100000;
-
-		// Timer counter
-		app.count = app.timeLimit;
-		$('#countdown').html(formatTime(app.count));
-
-
-		//Initialize score
+		// Initialize score
+		//--------------------
 		app.score = 0; 	
-
 		$('.totscore').html(app.score);
 
 		app.gamePaused = false;	
-
 		app.totCells = 144;
 
 		// Start at level 1
 		app.currentLevel = 1;
 		var gamegrid = $('#gamegrid');
 
+		// Build HTML used to append cells to grid
+		//--------------------
 		var cellStart = '<div class=cell data-id="null" style="background-color: rgb(227,233,237)" id=';
 		var cellEnd = "></div>";
 		var cellHTML = '';
@@ -60,15 +62,19 @@ var app = {
 		// Array to keep track of which Octocats have been used
 		app.octocatTracker = Array();
 
+
+		// Generate Icons & draw to board
 		app.buildIcons(app.currentLevel);
 	},
 
+	// Event Listeners
+	//--------------------
 	eventListeners: function(){
 		
 		var select = false; // Have we selected one already?
 
 		// Clicking on a cell
-
+		//--------------------
 		$('.cell').on('click', function(event){
 				
 			event.preventDefault();
@@ -82,27 +88,29 @@ var app = {
 				if (!timer.isActive){
 					timer.play(true);
 				}
+				// If first click
 				if (select === false){
 					select = true;
 					selectedCell.addClass("selected");
 					app.first = selectedCellData;
 				} 
-				else { // Make sure not selecting same cell
+				// 2nd click
+				else { 
+					// Make sure not selecting same cell
 					if (app.getId( selectedCellData.x,selectedCellData.y) === app.getId( app.first.x, app.first.y) ){
 						// If selected same class, removed selected, reset to 1st click
 						selectedCell.removeClass('selected');
 						select = false;
 					}
 					else{
+						// Reset clicks and check if its a Match
 						select = false;
 						app.second = selectedCellData;
 						app.checkMatch();
 					}
 				}
 			}
-
 		});
-
 
 		// Modal functionality
 		//--------------------
@@ -114,33 +122,27 @@ var app = {
 			$(".overlay").fadeOut();
 		}
 
+		// Quickly close modal
 		$(".overlay").on("click", function(){
+			// Only class with close is Instructions
 			if ($(this).hasClass("close")) {
 				closeModal();
 			}
 		});
 
-		$(document).on("keydown", function(e){
-			// ESC 
-			if(e.which == 27) 
-				closeModal();
-		});
-
 		// Next level
-		//--------------------
 		$('#nextLvl').on('click', function(){
 			$('#nextLevel').fadeOut();
 			app.buildIcons(app.currentLevel);
 		});
 
 		// Game Over
-
 		$('#playAgain').on('click', function(){
 			app.restartGame();
 		});
 
 		// Footer buttons
-
+		//--------------------
 		$('#moreTime').on("click", function(){
 			app.count += 10000;
 		});
@@ -157,6 +159,9 @@ var app = {
 
 	},// eventListeners
 
+	//--------------------
+	// buildIcons - function that evenly generates all icons and draws to grid
+	// @param level - int representing which level in game 
 	buildIcons: function(level){
 
 		app.totSolved = 0;  // Reset # of solved icons
@@ -171,6 +176,9 @@ var app = {
 		    selector,       // String representing # for jQuery calls
 		    sum;            // Int that determines which id on board to target
 
+		//--------------------
+		// Init - Initialize build depending which level game is on
+		// @param level - which level game is on
 		function init(level){
 
 			distribution = new Array(icons.length);
@@ -203,22 +211,23 @@ var app = {
 
 			totalOutput =  rows * columns;
 			app.totIcons = totalOutput; // Total # of icons to be solved
-			totDistributed = 0;
+			totDistributed = 0; // Reset total icons distributed to grid
 			selector = '#';
 			// Assign globaly for re-Order
 			app.start = start;
 			app.rows = rows;
-			app.columns = columns; //
+			app.columns = columns; 
 		}
-			
+
 		init(level);
 
+		// Iterate through all cells on current level
 		for (var i = 0; i < columns; i++) {
 			for(var j = 0; j < rows; j++){
-				sum = start + i + j*12; //id on grid
-				var sel = $(selector+sum);
+				// calculate which id on grid
+				sum = start + i + j*12; 
+				var sel = $(selector+sum); 
 				
-
 				// Ensure everything has a match when close to limit
 				if (totalOutput - totDistributed <= icons.length){
 
@@ -259,8 +268,8 @@ var app = {
 				var img = "url(../images/icons/" + icon.img+".png)";
 				sel.css('background-image',img);
 
+				// Assign data attributes to DOM
 				sel.data('id',icon.img);
-
 				sel.data('solved',false);
 				sel.data('x',app.getX(sum));
 				sel.data('y',app.getY(sum));
@@ -272,27 +281,33 @@ var app = {
 		// Re order so its more random
 		app.reOrder(rows, columns, start);
 
-
 	}, // BuildIcons
 
-	// Randomly select and Icon
+	//--------------------
+	// Randomly select an Icon
 	// @return Object - Icon from Icons.js
 	getIcon: function() {
 		var rand = Math.floor((Math.random() * (icons.length)));
 		return icons[rand];
 	},
 
+	//--------------------
+	// Randomly select an Octocat for next level
+	// @return String - filename of an Octocat
 	getOctocat: function() {
 		var rand = Math.floor((Math.random() * (octocats.length)));
+		
+		// Ensure that we are getting an octocat that hasn't already been used
 		if (!app.octocatTracker.contains(rand)){
 			app.octocatTracker.push(rand);
 			return octocats[rand].img;
 		}
+		// If it has been used then try again!
 		else
 			return app.getOctocat();
 	},
 
-
+	//--------------------
 	// If id % 12 = 0 then on 12th column, return 12, else return id % 12
 	// @param id - represents an position on the grid from 1-144
 	// @return int - An x coordinate representing which column the icon is on 
@@ -300,6 +315,7 @@ var app = {
 		return (id % 12 === 0) ? 12 : id % 12; 
 	},
 
+	//--------------------
 	// Return which row cell falls on based on 12 cells in a row
 	// @param id - represents an position on the grid from 1-144
 	// @return int - An y coordinate representing which row the icon is on
@@ -307,16 +323,26 @@ var app = {
 		return Math.ceil(id/12);
 	},
 
+	//--------------------
+	// Get a cell's id based on x & y coordinates
+	// @param x - int represent x coordinate on grid
+	// @param y - int represent y coordinate on grid
+	// @return int - representing id on grid (1-144)
 	getId: function(x,y){
 		// Y ordering starts at 1, account for this
 		return(x + 12 * (y-1));
 	},
 
+	//--------------------
+	// Increase score after match
 	increaseScore: function(){
+		// Each match increases score by 10
 		app.score += 10;
 		$('.totscore').html(app.score);
 	},
 
+	//--------------------
+	// Check if two cell's selected match each other
 	checkMatch: function(){
 
 		// Remove selected Animation
@@ -335,6 +361,10 @@ var app = {
 		//	console.log("Try to select the same Icon"); // Not same Icon
 	},
 
+	//--------------------
+	// Successfully matched two cells, update their data fields & remove BG
+	// @param first - Obj containing the first selected cell's data object
+	// @param second - Obj containing the second selected cell's data object
 	matchSuccess: function(first,second) {
 		cell1 =  $('#'+app.getId(first.x,first.y));
 		cell2 =  $('#'+app.getId(second.x,second.y));
@@ -358,6 +388,10 @@ var app = {
 
 	},
 
+
+	//--------------------
+	// Test if we've matched all the icons for the level
+	// Increment level if so
 	testLevelCompletion: function() {
 
 		if (app.totSolved === app.totIcons) {
@@ -374,6 +408,9 @@ var app = {
 		}
 	},
 
+
+	//--------------------
+	// Display Next Level modal with a new Octocat
 	nextLevel: function() {
 		$('#nextLevel').fadeIn();
 		var image = '../images/octocats/' + app.getOctocat();
@@ -381,25 +418,40 @@ var app = {
 		$('#octocat').attr('src',image);
 	},
 
-	reOrder: function(rows,columns,start) {
-		var idsUsed = Array();
-		var iconsUsed = Array();
-		var iconsDistributed = Array();
-		var sum, selector = '#';
-		var count = 0;
 
+	//--------------------
+	// ReOrder all the icons currently displayed on grid
+	// Ensure all solved positions are not redrawn to
+	// @param rows - int # of rows for current level
+	// @param columns - int # of columns for current level
+	// @param start - int id position on grid from where we draw from
+	reOrder: function(rows,columns,start) {
+		
+		// Which id's are unsolved?
+		var idsUsed = Array();
+		
+		// Which icons have we used? 
+		var iconsUsed = Array();
+		
+		// Out of the icons we have used, which have we reOrdered?
+		var iconsDistributed = Array();
+		
+		// Sum refers to calculated id
+		var sum, selector = '#';
+
+		//--------------------
+		// Get an index representing an icon that hasn't been distributed
 		function randomNumber() {
 			var rand = Math.floor((Math.random() * (iconsUsed.length)));
-			//console.log(rand);
 
+			// make sure the number hasn't been already distributed
 			if (!iconsDistributed.contains(rand)){
 				iconsDistributed.push(rand);
 				return rand;
 			}
-			else
+			else // Else try again
 				return randomNumber(length);
 		}
-
 
 		// Iterate through all cells and find all unsolved cells
 		for (var i = 0; i < columns; i++) {
@@ -411,20 +463,18 @@ var app = {
 				if (sel.data().id !== null){
 					// Add id & Icon to arrays 
 					
-					//console.log("pushed:" + sum + " Icon: " + sel.data().id);
 					idsUsed.push(sum);
 					iconsUsed.push(sel.data().id);
 				}
 			}
 		}
 
+		// Iterate through all unsolved Cells
 		for (var k = 0; k < idsUsed.length; k++){
-		
-
-			//console.log("sel:" + idsUsed[k]);
 			
 		 	var select = $(selector+idsUsed[k]);
 
+		 	// get and Icon that hasn't been distributed yet
 		 	var icon = randomNumber();
 		 	//console.log(idsUsed[k] + " col: " + iconsUsed[color]);
 		 	select.data('id',iconsUsed[icon]);
@@ -436,18 +486,24 @@ var app = {
 
 	},
 
+	//--------------------
+	// Display instructions Modal and pause the game
 	instructions: function() {
 		app.gamePaused = true;
 		timer.pause();
 		$('#instructions').fadeIn();
 	},
 
+	//--------------------
+	// Display Game Over modal
 	gameOver: function() {
 		$('#timesUp').fadeIn();
 		$('#gameOverOcto').attr('src','../images/octocats/gameover.png');
 
 	},
 
+	//--------------------
+	// Restart the game
 	restartGame: function() {
 		// Reset Divs
 		$('#gamegrid').html('');
@@ -470,6 +526,8 @@ $(document).ready(function(){
 
 });
 
+//--------------------
+// Prototype function that tests if an object is contained in an Array
 Array.prototype.contains = function ( needle ) {
 		for (var i in this) {
 			if (this[i] == needle) return true;

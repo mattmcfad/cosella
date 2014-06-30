@@ -1,7 +1,8 @@
 
 h1 {
-	@include helvlight;
+	@include helvheavy;
 	margin: 10px auto;
+	margin-top: 22px;
 	text-align: center;
 	font-size: 48px;
 	color: $accent;
