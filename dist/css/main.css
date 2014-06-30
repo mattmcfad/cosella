@@ -207,8 +207,6 @@ button {
   border: 0;
   border-bottom: 4px solid black;
   color: #ecf0f1;
-  -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease;
   text-transform: uppercase;
   font-weight: 700;
   padding: 6px 9px;
@@ -221,11 +219,26 @@ button:hover, button:focus {
   outline: none;
   border-bottom: 0;
 }
+button.singleButton {
+  width: 50%;
+  margin: 0 auto;
+}
 
-footer button {
-  display: inline;
-  width: 200px;
-  margin: 19px;
+footer {
+  width: 486px;
+  margin: 0 auto;
+  margin-top: 17px;
+}
+footer .buttonHolder {
+  float: left;
+  margin: 0 2.5%;
+  width: 30%;
+}
+footer .buttonHolder#tim {
+  margin-left: 0;
+}
+footer .buttonHolder#inst {
+  margin-right: 0;
 }
 
 .overlay {
@@ -242,16 +255,15 @@ footer button {
 }
 .overlay .modal {
   position: relative;
-  width: 800px;
-  height: 800px;
+  width: 600px;
+  height: 640px;
   background: white;
   border-radius: 2px;
   -webkit-box-shadow: -5px 5px 0 #2c3e50;
           box-shadow: -5px 5px 0 #2c3e50;
   margin: 55px auto;
-  padding: 20px;
+  padding: 25px 40px;
   text-align: center;
-  padding: 50px;
 }
 .overlay .modal h3 .totscore {
   display: inline;
@@ -259,15 +271,12 @@ footer button {
 .overlay .modal .case {
   float: left;
   width: 50%;
-  height: 250px;
+  height: 200px;
   padding: 10px;
 }
 .overlay .modal .case p {
   margin: 0 auto;
   width: 80%;
-}
-.overlay .modal .case #case1, .overlay .modal .case #case2 {
-  margin-top: 50px;
 }
 .overlay .modal .case img#case1 {
   width: 143px;
@@ -300,10 +309,12 @@ h1 {
   margin: 0 auto;
   text-align: center;
   font-size: 48px;
+  letter-spacing: 5px;
 }
 
 h3 {
   font-size: 32px;
+  margin: 0 auto;
 }
 
 a {
@@ -316,30 +327,30 @@ a {
   max-width: 1000px;
   min-width: 800px;
   height: 900px;
-  background-color: #ecf0f1;
 }
 
 .gamebox {
   margin: 0 auto;
-  width: 800px;
-  height: 800px;
+  width: 600px;
+  height: 640px;
   border: 3px #2c3e50 solid;
   border-radius: 5px;
-  padding: 40px;
+  padding: 20px;
   padding-top: 0;
 }
 .gamebox .header {
   margin: inherit;
-  width: 600px;
+  width: 486px;
 }
 .gamebox .header h2 {
-  width: 50%;
   float: left;
 }
 .gamebox .header h2#time {
   text-align: left;
+  width: 70%;
 }
 .gamebox .header h2#score {
+  width: 30%;
   text-align: right;
 }
 .gamebox .header h2 p, .gamebox .header h2 #totscore {
@@ -347,13 +358,13 @@ a {
 }
 .gamebox .gamegrid {
   margin: inherit;
-  width: 606px;
-  height: 606px;
+  width: 486px;
+  height: 486px;
   border: inherit;
 }
 .gamebox .gamegrid .cell {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   float: left;
   border: 1px solid #2c3e50;
 }

@@ -12,15 +12,17 @@
 
   .modal {
     position: relative;
-    width: 800px;
-    height: 800px;
+    width: $boxSize;
+    height: $boxSize+40px;
     background: rgb(255, 255, 255);
     border-radius: 2px;
     box-shadow: -5px 5px 0 $black;
     margin: 55px auto;
-    padding: 20px;
+    padding: 25px 40px;
     text-align: center;
-    padding: 50px;
+
+
+
 
     
     h3 {
@@ -32,16 +34,12 @@
     .case {
       float: left;
       width: 50%;
-      height: 250px;
+      height: 200px;
       padding: 10px;
 
       p {
         @include m0;
         width: 80%;
-      }
-
-      #case1, #case2 {
-        margin-top: 50px;
       }
 
       img#case1{

@@ -4,8 +4,10 @@ h1 {
 	@include m0;
 	text-align: center;
 	font-size: 48px;
+	letter-spacing: 5px;
 }
 
 h3 {
 	font-size: 32px;
+	@include m0;
 }

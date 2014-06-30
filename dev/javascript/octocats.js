@@ -37,5 +37,9 @@ var octocats = [
 	},
 	{
 		img: 'xtocat.jpg'
+	},
+	{
+		img: 'riddlocat.png'
 	}
+
 ];

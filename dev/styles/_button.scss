@@ -3,18 +3,36 @@ button {
 	border:0;
 	border-bottom: 4px solid $accenta;
 	color: $white;
-	transition: all 0.3s ease;
+	//transition: all 0.3s ease;
 	@include stylishButton;
 	&:hover, &:focus {
 		@include undoDefault;
 		border-bottom: 0;
 	}
+
+    &.singleButton {
+        width: 50%;
+        @include m0;
+    }
 }
 
-footer button {
+footer {
+	width: $gridSize;
+	@include m0;
+	margin-top: 17px;
+	
+	.buttonHolder {
+		float: left;
+		margin: 0 2.5%;		
+		width: 30%;
+		&#tim{
+			margin-left: 0;
+		}
 
-	display: inline;
-	width: 200px;
-	margin: 19px;
+		&#inst {
+			margin-right: 0;
+		}
+	}
 
+	
 }
