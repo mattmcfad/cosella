@@ -89,7 +89,8 @@ var app = {
 				} 
 				else { // Make sure not selecting same cell
 					if (app.getId( selectedCellData.x,selectedCellData.y) === app.getId( app.first.x, app.first.y) ){
-						//console.log('no same onez1!!');
+						// If selected same class, removed selected, reset to 1st click
+						selectedCell.removeClass('selected');
 						select = false;
 					}
 					else{
