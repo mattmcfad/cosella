@@ -40,6 +40,18 @@ var octocats = [
 	},
 	{
 		img: 'riddlocat.png'
+	},
+	{
+		img: 'stormtroopocat.png'
+	},
+	{
+		img: 'okal-eltocat.jpg'
+	},
+	{
+		img: 'dodgetocat_v2.png'
+	},
+	{
+		img: 'daftpunktocat-thomas.gif'
 	}
 
 ];

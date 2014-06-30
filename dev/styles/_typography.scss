@@ -10,4 +10,13 @@ h1 {
 h3 {
 	font-size: 32px;
 	@include m0;
+	@include helvheavy;
+}
+
+p {
+	@include helvlight;
+}
+
+button {
+	@include helvheavy;
 }

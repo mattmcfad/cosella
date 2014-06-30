@@ -15,7 +15,7 @@ a {
 	@include m0;
 	width: $boxSize;
 	height: $boxSize + 40px; // Account for bottom buttons
-	border: $borderSize $black solid;
+	//border: $borderSize $black solid;
 	border-radius: 5px;
 	padding: 20px;
 	padding-top: 0;

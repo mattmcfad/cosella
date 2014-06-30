@@ -4,11 +4,14 @@
  *  app.currentLevel - Int Current level (1 - 4)
  *  app.totSolved    - Int Total # of solved Icons for current level
  *  app.totIcons     - Int Total # of Icons on board for current level
- *  app.First        - Object containing Data of first cell selected
+ *  app.first        - Object containing Data of first cell selected
  *  app.second       - Object containing Data of second cell selected
  *  app.score		 - Int Score in game
  *  app.gamePaused   - Boolean is the game paused.
  *	app.count        - Int time remaining in game
+ *  app.start        - Int starting id location on grid for current level
+ *  app.rows         - Int # of rows for current level
+ *  app.columns      - Int # of columns for current level
  */
 
 
@@ -139,7 +142,7 @@ var app = {
 		});
 
 		$('#reOrder').on("click", function(){
-			app.reOrder();
+			app.reOrder(app.rows,app.columns,app.start);
 		});
 
 
@@ -194,6 +197,10 @@ var app = {
 			app.totIcons = totalOutput; // Total # of icons to be solved
 			totDistributed = 0;
 			selector = '#';
+			// Assign globaly for re-Order
+			app.start = start;
+			app.rows = rows;
+			app.columns = columns; //
 		}
 			
 		init(level);
@@ -243,7 +250,7 @@ var app = {
 				sel.data('y',app.getY(sum));
 			}	
 		}
-	},
+	}, // BuildIcons
 
 	// Randomly select and Icon
 	// @return Object - Icon from Icons.js
@@ -261,6 +268,7 @@ var app = {
 		else
 			return app.getOctocat();
 	},
+
 
 	// If id % 12 = 0 then on 12th column, return 12, else return id % 12
 	// @param id - represents an position on the grid from 1-144
@@ -344,7 +352,59 @@ var app = {
 		$('#octocat').attr('src',image);
 	},
 
-	reOrder: function() {
+	reOrder: function(rows,columns,start) {
+		var idsUsed = Array();
+		var iconsUsed = Array();
+		var iconsDistributed = Array();
+		var sum, selector = '#';
+		var count = 0;
+
+		function randomNumber() {
+			var rand = Math.floor((Math.random() * (iconsUsed.length)));
+			console.log(rand);
+
+			if (!iconsDistributed.contains(rand)){
+				iconsDistributed.push(rand);
+				return rand;
+			}
+			else
+				return randomNumber(length);
+		}
+
+
+		// Iterate through all cells and find all unsolved cells
+		for (var i = 0; i < columns; i++) {
+			for(var j = 0; j < rows; j++){
+				sum = start + i + j*12; //id on grid
+				var sel = $(selector+sum);
+
+				// If the square has not been solved
+				if (sel.data().id !== null){
+					// Add id & Icon to arrays 
+					
+					//console.log("pushed:" + sum + " Icon: " + sel.data().id);
+					idsUsed.push(sum);
+					iconsUsed.push(sel.data().id);
+				}
+			}
+		}
+
+		for (var k = 0; k < idsUsed.length; k++){
+		
+
+			console.log("sel:" + idsUsed[k]);
+			
+		 	var select = $(selector+idsUsed[k]);
+
+		 	var color = randomNumber();
+		 	console.log(idsUsed[k] + " col: " + iconsUsed[color]);
+		 	select.data('id',iconsUsed[color]);
+		 	select.css('background-color', iconsUsed[color]);
+
+		}
+				
+
+
 
 	},
 
@@ -364,15 +424,14 @@ var app = {
 		// Reset Divs
 		$('#gamegrid').html('');
 		
-
 		timer.pause();
-		
 
 		app.init();
 		app.eventListeners();
 
 		$('#timesUp').fadeOut();
 	}
+			
 
 }; // app
 
