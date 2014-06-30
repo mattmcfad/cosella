@@ -289,6 +289,9 @@ footer .buttonHolder#inst {
   padding: 25px 40px;
   text-align: center;
 }
+.overlay .modal h3 {
+  margin: 15px auto;
+}
 .overlay .modal h3 .totscore {
   display: inline;
 }

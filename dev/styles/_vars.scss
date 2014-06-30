@@ -1,7 +1,8 @@
 $blue: #3498db;
 $black: #2c3e50;
 $white: #ecf0f1;
-$gray: #bdc3c7;
+$darkgray: #bdc3c7;
+$gray: lighten($darkgray,20%);
 
 
 $boxSize: 600px;

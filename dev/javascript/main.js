@@ -46,7 +46,7 @@ var app = {
 		app.currentLevel = 1;
 		var gamegrid = $('#gamegrid');
 
-		var cellStart = '<div class=cell data-id="null" style="background-color: rgb(189,195,199)" id=';
+		var cellStart = '<div class=cell data-id="null" style="background-color: rgb(227,233,237)" id=';
 		var cellEnd = "></div>";
 		var cellHTML = '';
 
@@ -343,8 +343,8 @@ var app = {
 		cell1.data('id',null);
 		cell2.data('solved',true);
 		cell2.data('id',null);
-		cell1.css('background-color','rgb(189,195,199)');
-		cell2.css('background-color','rgb(189,195,199)');
+		cell1.css('background-color','rgb(227,233,237)');
+		cell2.css('background-color','rgb(227,233,237)');
 		cell1.css('background-image', 'none');
 		cell2.css('background-image', 'none');
 
