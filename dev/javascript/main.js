@@ -105,8 +105,9 @@ var app = {
 
 
 		// Modal functionality
-
+		//--------------------
 		function closeModal() {
+			// If game was paused, resume clock! no cheating
 			if (app.gamePaused === true){
 				timer.play();
 			}
@@ -126,7 +127,7 @@ var app = {
 		});
 
 		// Next level
-
+		//--------------------
 		$('#nextLvl').on('click', function(){
 			$('#nextLevel').fadeOut();
 			app.buildIcons(app.currentLevel);
@@ -249,18 +250,26 @@ var app = {
 				// Increase total icons distributed
 				totDistributed++;
 				
-				var color = icon.color;
-				sel.css('background-color',color);
-				sel.data('id',color);
+				// Change from Color to Background-Image
+				//--------------------
+				//var color = icon.color;
+				//sel.css('background-color',color);
+				//sel.data('id',color);
+
+				var img = "url(../images/icons/" + icon.img+".png)";
+				sel.css('background-image',img);
+
+				sel.data('id',icon.img);
+
 				sel.data('solved',false);
 				sel.data('x',app.getX(sum));
 				sel.data('y',app.getY(sum));
 
-
 			}	
 		}
 
-
+		// We have even distribution but last 4-12 cells are repeats side by side
+		// Re order so its more random
 		app.reOrder(rows, columns, start);
 
 
@@ -336,6 +345,9 @@ var app = {
 		cell2.data('id',null);
 		cell1.css('background-color','rgb(189,195,199)');
 		cell2.css('background-color','rgb(189,195,199)');
+		cell1.css('background-image', 'none');
+		cell2.css('background-image', 'none');
+
 
 		// Just matched two squares.
 		app.totSolved = app.totSolved + 2;
@@ -413,10 +425,12 @@ var app = {
 			
 		 	var select = $(selector+idsUsed[k]);
 
-		 	var color = randomNumber();
+		 	var icon = randomNumber();
 		 	//console.log(idsUsed[k] + " col: " + iconsUsed[color]);
-		 	select.data('id',iconsUsed[color]);
-		 	select.css('background-color', iconsUsed[color]);
+		 	select.data('id',iconsUsed[icon]);
+		 	//select.css('background-icon', iconsUsed[icon]);
+		 	var img = "url(../images/icons/" + iconsUsed[icon]+".png)";
+		 	select.css('background-image', img);
 
 		}
 
