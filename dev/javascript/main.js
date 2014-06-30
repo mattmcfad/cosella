@@ -25,8 +25,11 @@ var app = {
 
 
 
-		// 120 seconds
-		app.count = 120000;
+		// 100 seconds
+		app.timeLimit = 100000;
+
+		// Timer counter
+		app.count = app.timeLimit;
 		$('#countdown').html(formatTime(app.count));
 
 
@@ -83,7 +86,7 @@ var app = {
 				} 
 				else { // Make sure not selecting same cell
 					if (app.getId( $(this).data().x,$(this).data().y) === app.getId( app.first.x, app.first.y) ){
-						console.log('no same onez1!!');
+						//console.log('no same onez1!!');
 						select = false;
 					}
 					else{
@@ -248,8 +251,15 @@ var app = {
 				sel.data('solved',false);
 				sel.data('x',app.getX(sum));
 				sel.data('y',app.getY(sum));
+
+
 			}	
 		}
+
+
+		app.reOrder(rows, columns, start);
+
+
 	}, // BuildIcons
 
 	// Randomly select and Icon
@@ -305,8 +315,8 @@ var app = {
 					// Attempt to match through Zig-Zag pattern
 					case3.test(app.first,app.second);
 		}
-		else 
-			console.log("Try to select the same Icon"); // Not same Icon
+		//else 
+		//	console.log("Try to select the same Icon"); // Not same Icon
 	},
 
 	matchSuccess: function(first,second) {
@@ -333,9 +343,9 @@ var app = {
 
 		if (app.totSolved === app.totIcons) {
 			timer.stop();
-			app.count = 115000;
+			app.count = app.timeLimit;
 			$('#countdown').html(formatTime(app.count));
-			console.log("win");
+			//console.log("win");
 			// if you beat level 4 keep playing it
 			if (app.currentLevel !== 4 )
 				app.currentLevel++;
@@ -361,7 +371,7 @@ var app = {
 
 		function randomNumber() {
 			var rand = Math.floor((Math.random() * (iconsUsed.length)));
-			console.log(rand);
+			//console.log(rand);
 
 			if (!iconsDistributed.contains(rand)){
 				iconsDistributed.push(rand);
@@ -392,19 +402,16 @@ var app = {
 		for (var k = 0; k < idsUsed.length; k++){
 		
 
-			console.log("sel:" + idsUsed[k]);
+			//console.log("sel:" + idsUsed[k]);
 			
 		 	var select = $(selector+idsUsed[k]);
 
 		 	var color = randomNumber();
-		 	console.log(idsUsed[k] + " col: " + iconsUsed[color]);
+		 	//console.log(idsUsed[k] + " col: " + iconsUsed[color]);
 		 	select.data('id',iconsUsed[color]);
 		 	select.css('background-color', iconsUsed[color]);
 
 		}
-				
-
-
 
 	},
 

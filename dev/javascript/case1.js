@@ -83,7 +83,7 @@ var case1 = {
 					cordX--;
 					cell = $('#'+app.getId(cordX,cordY));
 					if (cordX === second.x){
-						console.log('match!');
+						//console.log('match!');
 						solved = true;
 						break;
 					}
