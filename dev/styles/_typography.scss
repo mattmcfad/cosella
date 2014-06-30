@@ -1,9 +1,10 @@
 
 h1 {
 	@include helvlight;
-	@include m0;
+	margin: 10px auto;
 	text-align: center;
 	font-size: 48px;
+	color: $accent;
 	letter-spacing: 5px;
 }
 

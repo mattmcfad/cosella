@@ -202,6 +202,30 @@ img {
   max-width: 100%;
 }
 
+.selected {
+  -webkit-animation: pulse 0.5s alternate infinite ease-in;
+          animation: pulse 0.5s alternate infinite ease-in;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    border: none;
+  }
+
+  100% {
+    border: dashed #e74c3c 3px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    border: none;
+  }
+
+  100% {
+    border: dashed #e74c3c 3px;
+  }
+}
 button {
   background: #e74c3c;
   border: 0;
@@ -305,9 +329,10 @@ footer .buttonHolder#inst {
 h1 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
-  margin: 0 auto;
+  margin: 10px auto;
   text-align: center;
   font-size: 48px;
+  color: #e74c3c;
   letter-spacing: 5px;
 }
 

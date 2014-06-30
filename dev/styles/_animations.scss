@@ -1,0 +1,12 @@
+.selected {
+	animation: pulse 0.5s alternate infinite ease-in;
+}
+
+@keyframes pulse {
+	0% {
+		border: none;
+	}
+	100% {
+		border: dashed $accent 3px;
+	}
+}
