@@ -265,7 +265,7 @@ var app = {
 				//sel.css('background-color',color);
 				//sel.data('id',color);
 
-				var img = "url(../images/icons/" + icon.img+".png)";
+				var img = "url(images/icons/" + icon.img+".png)";
 				sel.css('background-image',img);
 
 				// Assign data attributes to DOM
@@ -413,7 +413,7 @@ var app = {
 	// Display Next Level modal with a new Octocat
 	nextLevel: function() {
 		$('#nextLevel').fadeIn();
-		var image = '../images/octocats/' + app.getOctocat();
+		var image = 'images/octocats/' + app.getOctocat();
 		
 		$('#octocat').attr('src',image);
 	},
@@ -479,7 +479,7 @@ var app = {
 		 	//console.log(idsUsed[k] + " col: " + iconsUsed[color]);
 		 	select.data('id',iconsUsed[icon]);
 		 	//select.css('background-icon', iconsUsed[icon]);
-		 	var img = "url(../images/icons/" + iconsUsed[icon]+".png)";
+		 	var img = "url(images/icons/" + iconsUsed[icon]+".png)";
 		 	select.css('background-image', img);
 
 		}
@@ -498,7 +498,7 @@ var app = {
 	// Display Game Over modal
 	gameOver: function() {
 		$('#timesUp').fadeIn();
-		$('#gameOverOcto').attr('src','../images/octocats/gameover.png');
+		$('#gameOverOcto').attr('src','images/octocats/gameover.png');
 
 	},
 
