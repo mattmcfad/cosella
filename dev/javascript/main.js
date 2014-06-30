@@ -23,7 +23,7 @@ var app = {
 
 
 		// 120 seconds
-		app.count = 120;
+		app.count = 120000;
 		$('#countdown').html(formatTime(app.count));
 
 
@@ -40,7 +40,7 @@ var app = {
 		app.currentLevel = 1;
 		var gamegrid = $('#gamegrid');
 
-		var cellStart = '<div class=cell style="background-color: rgb(189,195,199)" id=';
+		var cellStart = '<div class=cell data-id="null" style="background-color: rgb(189,195,199)" id=';
 		var cellEnd = "></div>";
 		var cellHTML = '';
 
@@ -59,7 +59,7 @@ var app = {
 
 	eventListeners: function(){
 		
-		var select = false; // Test if selected
+		var select = false; // Have we selected one already?
 
 		// Clicking on a cell
 
@@ -67,28 +67,30 @@ var app = {
 				
 			event.preventDefault();
 
-			// Make sure timer is running
-			if (!timer.isActive){
-				timer.play(true);
+			// If we clicked on a selectable cell
+			// Data-id null if solved or empty
+			if($(this).data().id !== null){
+				// Make sure timer is running
+				if (!timer.isActive){
+					timer.play(true);
+				}
+				if (select === false){
+					select = true;
+					app.first = $(this).data();
+				} 
+				else { // Make sure not selecting same cell
+					if (app.getId( $(this).data().x,$(this).data().y) === app.getId( app.first.x, app.first.y) ){
+						console.log('no same onez1!!');
+						select = false;
+					}
+					else{
+						select = false;
+						app.second = $(this).data();
+						app.checkMatch();
+					}
+				}
 			}
 
-			if (select === false){
-				select = true;
-				app.first = $(this).data();
-			} 
-			else {
-
-				if ( app.getId( $(this).data().x,$(this).data().y) === app.getId( app.first.x, app.first.y) ){
-					console.log('no same onez1!!');
-					select = false;
-				}
-				else{
-					select = false;
-					app.second = $(this).data();
-
-					app.checkMatch();
-				}
-			}
 		});
 
 

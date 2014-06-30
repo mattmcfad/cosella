@@ -299,7 +299,6 @@ footer .buttonHolder#inst {
   background-image: url(../images/case3.png);
 }
 .overlay .modal .octocat {
-  width: 70%;
   height: 70%;
 }
 
@@ -324,9 +323,6 @@ a {
 
 .wrapper {
   margin: 0 auto;
-  max-width: 1000px;
-  min-width: 800px;
-  height: 900px;
 }
 
 .gamebox {
