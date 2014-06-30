@@ -2,63 +2,78 @@
 var icons = [
 	{
 		id: 0,
-		color: "darkblue"
+		color: "darkblue",
+		img: "Qbert.png"
 	},
 	{
 		id: 1,
-		color: "saddlebrown"
+		color: "saddlebrown",
+		img: "Hami.png"
 	},
 	{
 		id: 2,
-		color: "gold"
+		color: "gold",
+		img: "Chris.png"
 	},
 	{
 		id: 3,
-		color: "gray"
+		color: "gray",
+		img: "Rob.png"
 	},
 	{
 		id: 4,
-		color: "mediumaquamarine"
+		color: "mediumaquamarine",
+		img: "Simon.png"
 	},
 	{
 		id: 5,
-		color: "darkkhaki"
+		color: "darkkhaki",
+		img: "Owen.png"
 	},
 	{
 		id: 6,
-		color: "brown"
+		color: "brown",
+		img: "Mark-L.png"
 	},
 	{
 		id: 7,
-		color: "peru"
+		color: "peru",
+		img: "Steven.png"
 	},
 	{
 		id: 8,
-		color: "deeppink"
+		color: "deeppink",
+		img: "Brian.png"
 	},
 	{
 		id: 9,
-		color: "cyan"
+		color: "cyan",
+		img: "Raymond.png"
 	},
 	{
 		id: 10,
-		color: "lightcoral"
+		color: "lightcoral",
+		img: "Hannah.png"
 	},
 	{
 		id: 11,
-		color: "steelblue"
+		color: "steelblue",
+		img: "Adam.png"
 	},
 	{
 		id: 12,
-		color: "darkviolet"
+		color: "darkviolet",
+		img: "Jenn.png"
 	},
 	{
 		id: 13,
-		color: "limegreen"
+		color: "limegreen",
+		img: "Rebecca.png"
 	},
 	{
 		id: 14,
-		color: "whitesmoke"
+		color: "whitesmoke",
+		img: "Hema.png"
 	}
 
 ];
