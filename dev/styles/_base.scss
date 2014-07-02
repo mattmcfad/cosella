@@ -5,17 +5,12 @@ a {
 
 .wrapper {
 	@include m0;
-	// max-width: 1000px;
-	// min-width: 800px;
-	// height: 900px;
-	//background-color: $white;
 }
 
 .gamebox {
 	@include m0;
 	width: $boxSize;
 	height: $boxSize + 40px; // Account for bottom buttons
-	//border: $borderSize $black solid;
 	border-radius: 5px;
 	padding: 20px;
 	padding-top: 0;
@@ -51,7 +46,7 @@ a {
 			height: $cellSize;
 			background-size: cover;
 			float: left;
-			border: 1px solid $black;
+			border: 1px solid $border;
 
 		}
 

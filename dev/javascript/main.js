@@ -48,7 +48,7 @@ var app = {
 
 		// Build HTML used to append cells to grid
 		//--------------------
-		var cellStart = '<div class=cell data-id="null" style="background-color: rgb(227,233,237)" id=';
+		var cellStart = '<div class=cell data-id="null" style="background-color: rgba(237,236,236,1)" id=';
 		var cellEnd = "></div>";
 		var cellHTML = '';
 
@@ -373,8 +373,8 @@ var app = {
 		cell1.data('id',null);
 		cell2.data('solved',true);
 		cell2.data('id',null);
-		cell1.css('background-color','rgb(227,233,237)');
-		cell2.css('background-color','rgb(227,233,237)');
+		cell1.css('background-color','rgba(237,236,236,1)');
+		cell2.css('background-color','rgba(237,236,236,1)');
 		cell1.css('background-image', 'none');
 		cell2.css('background-image', 'none');
 
