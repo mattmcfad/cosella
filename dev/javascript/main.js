@@ -500,6 +500,8 @@ var app = {
 		$('#timesUp').fadeIn();
 		$('#gameOverOcto').attr('src','images/octocats/gameover.png');
 
+		firebase.push("matt","@mattmcfad",app.currentLevel, app.score);
+
 	},
 
 	//--------------------
@@ -522,6 +524,8 @@ var app = {
 $(document).ready(function(){
 	
 	app.init();
+	firebase.init();
+	console.log("over");
 	app.eventListeners();
 
 });
