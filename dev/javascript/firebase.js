@@ -35,11 +35,11 @@ var firebase = {
 		for (var i = 0; i < firebase.localDB.length; i++) {
 	
 
-			selector.append("<li>Name: "+
-			firebase.localDB[i].name + 
-			 " " +   firebase.localDB[i].twitter + 
-			 " lvl:"+firebase.localDB[i].level + 
-			 " <span class='score'>" + firebase.localDB[i].score + "</span></li>");
+			// selector.append("<li>Name: "+
+			// firebase.localDB[i].name + 
+			//  " " +   firebase.localDB[i].twitter + 
+			//  " lvl:"+firebase.localDB[i].level + 
+			//  " <span class='score'>" + firebase.localDB[i].score + "</span></li>");
 
 		}
 	}
