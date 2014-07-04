@@ -144,7 +144,7 @@ var app = {
 		// Footer buttons
 		//--------------------
 		$('#moreTime').on("click", function(){
-			app.count += 10000;
+			app.count = app.count + 10000;
 		});
 
 		$("#instruct").on("click", function(){
@@ -525,7 +525,6 @@ $(document).ready(function(){
 	
 	app.init();
 	firebase.init();
-	console.log("over");
 	app.eventListeners();
 
 });
