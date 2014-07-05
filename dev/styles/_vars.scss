@@ -42,6 +42,35 @@ $sans: 'Montserrat', sans-serif;
   font-weight: 700;
 }
 
+@mixin left {
+
+}
+
+@mixin middle {
+ @include helvlight;
+}
+
+@mixin top {
+  font-size: 18px;
+}
+
+@mixin bottom {
+  font-size: 14px;
+}
+
+@mixin spanMid {
+  @include helvheavy;
+  font-size: 16px;
+}
+
+@mixin right {
+  @include helvheavy;
+  font-size: 35px;
+}
+
+
+
+
 @mixin stylishButton {
   @include bigboys;
   padding: 6px 9px;

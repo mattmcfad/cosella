@@ -22,3 +22,25 @@ p {
 button {
 	@include helvheavy;
 }
+
+
+.middle {
+	@include middle;
+}
+
+.top {
+	@include top;
+}
+
+.bottom {
+	@include bottom;
+}
+
+span {
+	@include spanMid;
+}
+
+.right {
+	@include right;
+}
+

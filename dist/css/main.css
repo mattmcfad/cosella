@@ -329,28 +329,59 @@ footer .buttonHolder#inst {
   height: 70%;
 }
 
-ol
-li {
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: li-counter;
+}
+ol > li {
   border: 1px solid #000;
+  height: 51px;
+  position: relative;
+}
+ol > li:before {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  width: 5%;
+  font-size: 40px;
+  content: counter(li-counter);
+  counter-increment: li-counter;
 }
 
+.scoreListItem {
+  height: 51px;
+  position: relative;
+}
 .scoreListItem .left {
-  float: left;
+  position: absolute;
+  top: 0;
+  left: 8px;
   width: 5%;
+  font-size: 40px;
+  margin: 0;
 }
 .scoreListItem .middle {
   float: left;
-  width: 75%;
+  margin-left: 10%;
+  width: 70%;
+  height: 100%;
+  padding: 5px 15px;
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+  text-align: left;
 }
 .scoreListItem .middle .usrlvl {
   float: right;
   width: 20%;
-  text-align: right;
+  text-align: center;
   display: inline-block;
 }
 .scoreListItem .right {
   float: left;
   width: 20%;
+  margin: 0;
 }
 
 h1 {
@@ -379,6 +410,31 @@ p {
 button {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 700;
+}
+
+.middle {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+
+.top {
+  font-size: 18px;
+}
+
+.bottom {
+  font-size: 14px;
+}
+
+span {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.right {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 700;
+  font-size: 35px;
 }
 
 a {
