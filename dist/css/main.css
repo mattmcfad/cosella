@@ -334,6 +334,25 @@ li {
   border: 1px solid #000;
 }
 
+.scoreListItem .left {
+  float: left;
+  width: 5%;
+}
+.scoreListItem .middle {
+  float: left;
+  width: 75%;
+}
+.scoreListItem .middle .usrlvl {
+  float: right;
+  width: 20%;
+  text-align: right;
+  display: inline-block;
+}
+.scoreListItem .right {
+  float: left;
+  width: 20%;
+}
+
 h1 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 700;

@@ -1,3 +1,30 @@
 ol 
 	li {
-		border: 1px solid #000;	}
+		border: 1px solid #000;	
+	}
+
+
+.scoreListItem {
+	
+	.left {
+		float: left;
+		width: 5%;
+	}
+	.middle {
+		float: left;
+		width: 75%;
+		input {
+			
+		}
+		.usrlvl {
+			float: right;
+			width: 20%;
+			text-align: right;
+			display: inline-block
+		}	
+	}
+	.right {
+		float: left;
+		width: 20%;
+	}
+}
