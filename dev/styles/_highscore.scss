@@ -14,9 +14,14 @@ ol {
 		&:before{
 			position: absolute;
 			top:0;
-			left: 8px;
+			//left: 8px;
+			//width: 6%;
+
+			left: 0;
+			width: 10%;
+			color: $white;
+			background-color: $accenta;
 			
-			width: 6%;
 
 			font-size: 40px;
 			@include helvheavy;
@@ -37,8 +42,13 @@ ol {
 	.left {
 		position: absolute;
 		top: 0;
-		left: 8px;
-		width: 6%;
+		//left: 8px;
+		//width: 6%;
+		left: 0;
+		width: 10%;
+		color: $white;
+		background-color: $accenta;
+
 		font-size: 40px;
 		margin: 0;
 	}
@@ -52,15 +62,22 @@ ol {
 		border-right: 4px solid $black;
 		text-align: left;
 
-		background-color: $darkgray;
+		background-color: $cloudwhite;
 		.bottom {
 			color: $accenta;
 		}
 
-		input, input[placeholder] {
+		input{
 			background-color: inherit;
-			color: $white;
 			border: none;
+			
+			&.top {
+				color: black;
+			}
+			&.bottom {
+				color: $accenta;
+			}
+
 		}
 
 		.usrlvl {

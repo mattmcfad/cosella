@@ -342,8 +342,10 @@ ol > li {
 ol > li:before {
   position: absolute;
   top: 0;
-  left: 8px;
-  width: 6%;
+  left: 0;
+  width: 10%;
+  color: #ecf0f1;
+  background-color: #a82315;
   font-size: 40px;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 700;
@@ -359,8 +361,10 @@ ol > li:before {
 .scoreListItem .left {
   position: absolute;
   top: 0;
-  left: 8px;
-  width: 6%;
+  left: 0;
+  width: 10%;
+  color: #ecf0f1;
+  background-color: #a82315;
   font-size: 40px;
   margin: 0;
 }
@@ -373,15 +377,20 @@ ol > li:before {
   border-left: 4px solid #7f8c8d;
   border-right: 4px solid #7f8c8d;
   text-align: left;
-  background-color: #bdc3c7;
+  background-color: #ecf0f1;
 }
 .scoreListItem .middle .bottom {
   color: #a82315;
 }
-.scoreListItem .middle input, .scoreListItem .middle input[placeholder] {
+.scoreListItem .middle input {
   background-color: inherit;
-  color: #ecf0f1;
   border: none;
+}
+.scoreListItem .middle input.top {
+  color: black;
+}
+.scoreListItem .middle input.bottom {
+  color: #a82315;
 }
 .scoreListItem .middle .usrlvl {
   float: right;
@@ -447,7 +456,7 @@ button {
 
 span {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 700;
+  font-weight: 300;
   font-size: 16px;
 }
 
@@ -470,6 +479,22 @@ input:-moz-placeholder {
 }
 
 input:-ms-input-placeholder {
+  color: #a82315;
+}
+
+.top input::-webkit-input-placeholder {
+  color: black;
+}
+
+.top input::-moz-placeholder {
+  color: #a82315;
+}
+
+.top input:-moz-placeholder {
+  color: #a82315;
+}
+
+.top input:-ms-input-placeholder {
   color: #a82315;
 }
 

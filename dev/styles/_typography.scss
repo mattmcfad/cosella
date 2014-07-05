@@ -62,3 +62,21 @@ input:-ms-input-placeholder{
   color: $accenta;
 }
 
+//top
+
+.top input::-webkit-input-placeholder {
+		color: black;	
+}
+.top input::-moz-placeholder {
+	color: $accenta;
+}
+
+.top input:-moz-placeholder {
+	color: $accenta;
+}
+
+.top input:-ms-input-placeholder{
+  color: $accenta;
+}
+
+

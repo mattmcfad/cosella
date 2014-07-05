@@ -35,6 +35,7 @@ var firebase = {
 		// || i < firebase.localDB.length
 		for (var i = 0; i < 5 ; i++) {
 			var twitterHandle = firebase.localDB[i].twitter;
+			// Ensure @ is on front of twitter handle
 			if (twitterHandle.charAt(0) !== '@')
 				twitterHandle = '@' + twitterHandle;
 			var twitterUrl = "https://twitter.com/" + twitterHandle;
