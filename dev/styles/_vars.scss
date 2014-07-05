@@ -42,10 +42,6 @@ $sans: 'Montserrat', sans-serif;
   font-weight: 700;
 }
 
-@mixin left {
-
-}
-
 @mixin middle {
  @include helvlight;
 }

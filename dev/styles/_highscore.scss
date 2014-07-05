@@ -6,7 +6,7 @@ ol {
 	counter-reset: li-counter;
 
 	&>li {
-		border: 1px solid #000;
+		
 		height: 51px;
 		position: relative;
 		//padding: 5px;
@@ -16,9 +16,10 @@ ol {
 			top:0;
 			left: 8px;
 			
-			width: 5%;
+			width: 6%;
 
 			font-size: 40px;
+			@include helvheavy;
 
 			 content: counter(li-counter);
     		counter-increment: li-counter;
@@ -28,7 +29,8 @@ ol {
 
 
 .scoreListItem {
-
+	
+	border: 1px solid $black;
 	height: 51px;
 	position: relative;
 	
@@ -36,7 +38,7 @@ ol {
 		position: absolute;
 		top: 0;
 		left: 8px;
-		width: 5%;
+		width: 6%;
 		font-size: 40px;
 		margin: 0;
 	}
@@ -46,12 +48,21 @@ ol {
 		width: 70%;
 		height: 100%;
 		padding: 5px 15px;
-		border-left: 4px solid black;
-		border-right: 4px solid black;
+		border-left: 4px solid $black;
+		border-right: 4px solid $black;
 		text-align: left;
-		input {
-			
+
+		background-color: $darkgray;
+		.bottom {
+			color: $accenta;
 		}
+
+		input, input[placeholder] {
+			background-color: inherit;
+			color: $white;
+			border: none;
+		}
+
 		.usrlvl {
 			float: right;
 			width: 20%;
@@ -61,7 +72,13 @@ ol {
 	}
 	.right {
 		float: left;
-		width: 20%;
 		margin: 0;
+		padding: 5px;
+		width: 20%;
+		height: 100%;
+		
+		background-color: $accenta;
+		color: $white;
+		
 	}
 }

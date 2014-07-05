@@ -23,6 +23,9 @@ button {
 	@include helvheavy;
 }
 
+.left {
+	@include helvheavy;
+}
 
 .middle {
 	@include middle;
@@ -42,5 +45,20 @@ span {
 
 .right {
 	@include right;
+}
+
+input::-webkit-input-placeholder {
+	color: $accenta;
+}
+input::-moz-placeholder {
+	color: $accenta;
+}
+
+input:-moz-placeholder {
+	color: $accenta;
+}
+
+input:-ms-input-placeholder{
+  color: $accenta;
 }
 

@@ -336,7 +336,6 @@ ol {
   counter-reset: li-counter;
 }
 ol > li {
-  border: 1px solid #000;
   height: 51px;
   position: relative;
 }
@@ -344,13 +343,16 @@ ol > li:before {
   position: absolute;
   top: 0;
   left: 8px;
-  width: 5%;
+  width: 6%;
   font-size: 40px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 700;
   content: counter(li-counter);
   counter-increment: li-counter;
 }
 
 .scoreListItem {
+  border: 1px solid #7f8c8d;
   height: 51px;
   position: relative;
 }
@@ -358,7 +360,7 @@ ol > li:before {
   position: absolute;
   top: 0;
   left: 8px;
-  width: 5%;
+  width: 6%;
   font-size: 40px;
   margin: 0;
 }
@@ -368,9 +370,18 @@ ol > li:before {
   width: 70%;
   height: 100%;
   padding: 5px 15px;
-  border-left: 4px solid black;
-  border-right: 4px solid black;
+  border-left: 4px solid #7f8c8d;
+  border-right: 4px solid #7f8c8d;
   text-align: left;
+  background-color: #bdc3c7;
+}
+.scoreListItem .middle .bottom {
+  color: #a82315;
+}
+.scoreListItem .middle input, .scoreListItem .middle input[placeholder] {
+  background-color: inherit;
+  color: #ecf0f1;
+  border: none;
 }
 .scoreListItem .middle .usrlvl {
   float: right;
@@ -380,8 +391,12 @@ ol > li:before {
 }
 .scoreListItem .right {
   float: left;
-  width: 20%;
   margin: 0;
+  padding: 5px;
+  width: 20%;
+  height: 100%;
+  background-color: #a82315;
+  color: #ecf0f1;
 }
 
 h1 {
@@ -412,6 +427,11 @@ button {
   font-weight: 700;
 }
 
+.left {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 700;
+}
+
 .middle {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
@@ -435,6 +455,22 @@ span {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 700;
   font-size: 35px;
+}
+
+input::-webkit-input-placeholder {
+  color: #a82315;
+}
+
+input::-moz-placeholder {
+  color: #a82315;
+}
+
+input:-moz-placeholder {
+  color: #a82315;
+}
+
+input:-ms-input-placeholder {
+  color: #a82315;
 }
 
 a {
