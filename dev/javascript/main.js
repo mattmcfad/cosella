@@ -424,6 +424,7 @@ var app = {
 
 		if (app.totSolved === app.totIcons) {
 			timer.stop();
+			$('#countdown').removeClass('lowTime');
 
 			// Remaining time added to score
 			var bonusPoints = parseInt(formatTime(app.count));	

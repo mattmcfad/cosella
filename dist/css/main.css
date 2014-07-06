@@ -207,6 +207,11 @@ img {
           animation: pulse 0.5s alternate infinite ease-in;
 }
 
+.lowTime {
+  -webkit-animation: lowTime 0.2s alternate infinite;
+          animation: lowTime 0.2s alternate infinite;
+}
+
 @-webkit-keyframes pulse {
   0% {
     border: none;
@@ -224,6 +229,28 @@ img {
 
   100% {
     border: dashed #e74c3c 3px;
+  }
+}
+@-webkit-keyframes lowTime {
+  0% {
+    color: red;
+    font-size: 23px;
+  }
+
+  100% {
+    color: black;
+    font-size: 15px;
+  }
+}
+@keyframes lowTime {
+  0% {
+    color: red;
+    font-size: 23px;
+  }
+
+  100% {
+    color: black;
+    font-size: 15px;
   }
 }
 button {

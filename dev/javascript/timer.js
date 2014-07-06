@@ -13,6 +13,11 @@ var timer = $.timer(function() {
     // Decrement time by 10 milliseconds each iteration
     app.count -= 10;
 
+    if (app.count > 10000)
+        $('#countdown').removeClass('lowTime');
+    else
+        $('#countdown').addClass('lowTime');
+
     // Make sure we hit and stop at 0
     if (app.count < 0) 
     	app.count = 0;

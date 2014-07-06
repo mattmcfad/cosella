@@ -2,11 +2,27 @@
 	animation: pulse 0.5s alternate infinite ease-in;
 }
 
+.lowTime {
+	animation: lowTime 0.2s alternate infinite;
+}
+
 @keyframes pulse {
 	0% {
 		border: none;
 	}
 	100% {
 		border: dashed $accent 3px;
+	}
+}
+
+@keyframes lowTime {
+	0% {
+		color: red;
+		font-size: 23px;
+	}
+
+	100% {
+		color: black;
+		font-size: 15px;
 	}
 }
