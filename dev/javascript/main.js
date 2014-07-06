@@ -407,7 +407,6 @@ var app = {
 		cell1.css('background-image', 'none');
 		cell2.css('background-image', 'none');
 
-
 		// Just matched two squares.
 		app.totSolved = app.totSolved + 2;
 
@@ -427,18 +426,25 @@ var app = {
 			timer.stop();
 
 			// Remaining time added to score
-			var bonusPoints = parseInt(formatTime(app.count));
-	
+			var bonusPoints = parseInt(formatTime(app.count));	
 			app.score += bonusPoints;
 
-			// Reset time
-			app.count = app.timeLimit;
-			$('#countdown').html(formatTime(app.count));
-			
 			app.currentLevel++;
 
-			app.nextLevel(bonusPoints);
+			var timeReduced = 0;
+			// After level 4 reduce time incrementally by 10 seconds
+			if (app.currentLevel > 4) {
+				timeReduced = (app.currentLevel - 4) * 10 * 1000;
+
+			}
+			// Reset time
+			app.count = app.timeLimit - timeReduced;
+			// After level 13 you only have 10 seconds....
+			if (app.count === 0)
+				app.count = 10000;
+			$('#countdown').html(formatTime(app.count));
 			
+			app.nextLevel(bonusPoints);
 		}
 	},
 
