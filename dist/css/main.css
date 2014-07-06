@@ -264,7 +264,6 @@ button.doubleButton {
 footer {
   width: 486px;
   margin: 0 auto;
-  margin-top: 17px;
 }
 footer .buttonHolder {
   float: left;
@@ -343,7 +342,7 @@ footer .buttonHolder#inst {
 }
 .overlay#error .modal, .overlay#submit .modal {
   width: 325px;
-  height: 175px;
+  height: 160px;
   margin: 300px auto;
 }
 

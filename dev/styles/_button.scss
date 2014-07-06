@@ -34,8 +34,7 @@ button {
 footer {
 	width: $gridSize;
 	@include m0;
-	margin-top: 17px;
-	
+
 	.buttonHolder {
 		float: left;
 		margin: 0 2.2%;		

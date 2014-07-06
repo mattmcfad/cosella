@@ -49,12 +49,16 @@ var app = {
 		// Build HTML used to append cells to grid
 		//--------------------
 		var cellStart = '<div class=cell data-id="null" style="background-color: rgba(237,236,236,1)" id=';
+		var cellNullStart = '<div class=cell data-id="null" style="background-color: transparent" id=';
 		var cellEnd = "></div>";
 		var cellHTML = '';
 
 		// Append all the cells to the DOM
 		for (var i = 1; i < app.totCells+1; i++) {
-			cellHTML =  cellStart+i+cellEnd;
+			if (app.getX(i) === 1 || app.getX(i) === 12 || app.getY(i) === 1 || app.getY(i) ===12)
+				cellHTML = cellNullStart+i+cellEnd;
+			else
+				cellHTML =  cellStart+i+cellEnd;
 			gamegrid.append(cellHTML);
 			cellHTML = cellStart;
 		}
@@ -206,6 +210,10 @@ var app = {
 			for (var k = 0; k < icons.length; k++) {
 				distribution[k] = 0;
 			}
+
+			// Maximum rows*cols = 10x10
+			if (level > 4)
+				level = 4;
 
 			switch(level) {
 				case 1: 
@@ -417,14 +425,19 @@ var app = {
 
 		if (app.totSolved === app.totIcons) {
 			timer.stop();
+
+			// Remaining time added to score
+			var bonusPoints = parseInt(formatTime(app.count));
+	
+			app.score += bonusPoints;
+
+			// Reset time
 			app.count = app.timeLimit;
 			$('#countdown').html(formatTime(app.count));
-			//console.log("win");
-			// if you beat level 4 keep playing it
-			if (app.currentLevel !== 4 )
-				app.currentLevel++;
+			
+			app.currentLevel++;
 
-			app.nextLevel();
+			app.nextLevel(bonusPoints);
 			
 		}
 	},
@@ -432,8 +445,9 @@ var app = {
 
 	//--------------------
 	// Display Next Level modal with a new Octocat
-	nextLevel: function() {
+	nextLevel: function(bonusTime) {
 		$('#nextLevel').fadeIn();
+		$('.totscore').html(app.score);
 		var image = 'images/octocats/' + app.getOctocat();
 		
 		$('#octocat').attr('src',image);
