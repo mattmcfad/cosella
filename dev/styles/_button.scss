@@ -39,6 +39,12 @@ footer {
 		float: left;
 		margin: 0 2.2%;		
 		width: 30%;
+
+		font-size: 15px;
+		span {
+			@include helvheavy;
+			
+		}
 		&#tim{
 			margin-left: 0;
 		}

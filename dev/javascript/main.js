@@ -13,6 +13,8 @@
  *  app.start        - Int starting id location on grid for current level
  *  app.rows         - Int # of rows for current level
  *  app.columns      - Int # of columns for current level
+ *  app.reOrders     - Int # of reOrders remaining
+ *  app.moreTime     - Int # of 10s time increases remaining
  */
 
 //--------------------
@@ -45,6 +47,14 @@ var app = {
 		// Start at level 1
 		app.currentLevel = 1;
 		var gamegrid = $('#gamegrid');
+
+		// Start with 3 More Times
+		app.moreTime = 3;
+		$('#addMoreTime').text(app.moreTime);
+
+		// Start with 2 reOrders
+		app.reOrders = 2;
+		$('#addReOrder').text(app.reOrders);
 
 		// Build HTML used to append cells to grid
 		//--------------------
@@ -169,7 +179,8 @@ var app = {
 		// Footer buttons
 		//--------------------
 		$('#moreTime').on("click", function(){
-			app.count = app.count + 10000;
+			if (app.moreTime !== 0)
+				app.addMoreTime();
 		});
 
 		$("#instruct").on("click", function(){
@@ -177,7 +188,11 @@ var app = {
 		});
 
 		$('#reOrder').on("click", function(){
-			app.reOrder(app.rows,app.columns,app.start);
+			if (app.reOrders !== 0){
+				app.reOrder(app.rows,app.columns,app.start);
+				app.reOrders--;
+				$('#addReOrder').text(app.reOrders);
+			}
 		});
 
 
@@ -398,6 +413,12 @@ var app = {
 		cell1 =  $('#'+app.getId(first.x,first.y));
 		cell2 =  $('#'+app.getId(second.x,second.y));
 
+		// If we matched robot than add another more time!
+		if (cell1.data('id') === 'Qbert'){
+			app.moreTime++;
+			$('#addMoreTime').text(app.moreTime);
+		}
+
 		cell1.data('solved',true);
 		cell1.data('id',null);
 		cell2.data('solved',true);
@@ -436,8 +457,12 @@ var app = {
 			// After level 4 reduce time incrementally by 10 seconds
 			if (app.currentLevel > 4) {
 				timeReduced = (app.currentLevel - 4) * 10 * 1000;
-
 			}
+
+			// Reset Re-orders
+			app.reOrders = 2;
+			$('#addReOrder').text(app.reOrders);
+
 			// Reset time
 			app.count = app.timeLimit - timeReduced;
 			// After level 13 you only have 10 seconds....
@@ -468,7 +493,7 @@ var app = {
 	// @param columns - int # of columns for current level
 	// @param start - int id position on grid from where we draw from
 	reOrder: function(rows,columns,start) {
-		
+
 		// Which id's are unsolved?
 		var idsUsed = Array();
 		
@@ -526,6 +551,12 @@ var app = {
 
 		}
 
+	},
+
+	addMoreTime: function() {
+		app.moreTime--;
+		$('#addMoreTime').text(app.moreTime);
+		app.count = app.count + 10000;
 	},
 
 	//--------------------
