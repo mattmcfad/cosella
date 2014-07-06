@@ -5,10 +5,15 @@ button {
 	color: $white;
 	//transition: all 0.3s ease;
 	@include stylishButton;
-	&:hover, &:focus {
+	&:hover {
 		@include undoDefault;
 		border-bottom: 0;
 	}
+	&:focus {
+		@include undoDefault;
+	}
+
+
 
     &.singleButton {
         width: 50%;
@@ -29,6 +34,11 @@ button {
 	float: left;
 }
 
+.depletedButton {
+	color: rgb(237,146,137);
+	text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+
 
 
 footer {
@@ -43,7 +53,7 @@ footer {
 		font-size: 15px;
 		span {
 			@include helvheavy;
-			
+
 		}
 		&#tim{
 			margin-left: 0;

@@ -31,7 +31,7 @@ ol {
 
 .scoreListItem {
 	
-	border: 1px solid $black;
+	border: 1px solid $border;
 	height: 51px;
 	position: relative;
 	
@@ -52,8 +52,8 @@ ol {
 		width: 70%;
 		height: 100%;
 		padding: 5px 15px;
-		border-left: 4px solid $black;
-		border-right: 4px solid $black;
+		border-left: 4px solid $border;
+		border-right: 4px solid $border;
 		text-align: left;
 
 		background-color: $cloudwhite;

@@ -191,6 +191,9 @@ var app = {
 			if (app.reOrders !== 0){
 				app.reOrder(app.rows,app.columns,app.start);
 				app.reOrders--;
+				if (app.reOrders === 0){
+					$('#reOrder').addClass('depletedButton');
+				}
 				$('#addReOrder').text(app.reOrders);
 			}
 		});
@@ -416,6 +419,9 @@ var app = {
 		// If we matched robot than add another more time!
 		if (cell1.data('id') === 'Qbert'){
 			app.moreTime++;
+			if (app.moreTime !== 0){
+				$('#moreTime').removeClass('depletedButton');
+			}
 			$('#addMoreTime').text(app.moreTime);
 		}
 
@@ -461,6 +467,8 @@ var app = {
 
 			// Reset Re-orders
 			app.reOrders = 2;
+			if (app.reOrders !== 0)
+				$('#reOrder').removeClass('depletedButton');
 			$('#addReOrder').text(app.reOrders);
 
 			// Reset time
@@ -555,6 +563,9 @@ var app = {
 
 	addMoreTime: function() {
 		app.moreTime--;
+		if (app.moreTime === 0){
+			$('#moreTime').addClass('depletedButton');
+		}
 		$('#addMoreTime').text(app.moreTime);
 		app.count = app.count + 10000;
 	},

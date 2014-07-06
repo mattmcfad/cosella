@@ -266,9 +266,12 @@ button {
   display: block;
   width: 100%;
 }
-button:hover, button:focus {
+button:hover {
   outline: none;
   border-bottom: 0;
+}
+button:focus {
+  outline: none;
 }
 button.singleButton {
   width: 50%;
@@ -286,6 +289,11 @@ button.doubleButton {
 .buttonHolder {
   width: 50%;
   float: left;
+}
+
+.depletedButton {
+  color: #ed9289;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 footer {
@@ -403,7 +411,7 @@ ol > li:before {
 }
 
 .scoreListItem {
-  border: 1px solid #7f8c8d;
+  border: 1px solid rgba(255, 255, 255, 0.9);
   height: 51px;
   position: relative;
 }
@@ -423,8 +431,8 @@ ol > li:before {
   width: 70%;
   height: 100%;
   padding: 5px 15px;
-  border-left: 4px solid #7f8c8d;
-  border-right: 4px solid #7f8c8d;
+  border-left: 4px solid rgba(255, 255, 255, 0.9);
+  border-right: 4px solid rgba(255, 255, 255, 0.9);
   text-align: left;
   background-color: #ecf0f1;
 }
