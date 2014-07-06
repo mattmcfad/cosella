@@ -21,17 +21,45 @@ var firebase = {
 	// Add a high score to Firebase DB
 	push: function(name, twitterHandle, level, score) {
 		
-		firebase.db.push({'name': name , 'twitter': twitterUrl, 'level': level, 'score': score});
+		firebase.db.push({'name': name , 'twitter': twitterHandle, 'level': level, 'score': score});
 	},
 
-	
-	getHighscores: function() {
+	parseScore: function(score, level) {
 
+		$('#usrlvl').text(level);
+		$('#usrpoints').text(score);
 
+		var obj = { 'name': 'You!', 'twitter': '@yourTwitterHandle', 'level': level, 'score' :score};
+
+		firebase.localDB.push(obj);
+
+		$('#usrRank').text(firebase.getRank());
+
+	},
+
+	getRank: function() {
+		firebase.sortDB();
+
+		for (var i = 0; i < firebase.localDB.length; i++){
+			if(firebase.localDB[i].name === "You!")
+				return i;
+		}
+
+		return '99';
+	},
+
+	sortDB: function() {
 		firebase.localDB.sort(function(a,b) {
 			return b.score - a.score;
 		});
+	},
+	
+	getHighscores: function() {
+
+		firebase.sortDB();
+
 		var selector = $('ol');
+		selector.html('');
 		// || i < firebase.localDB.length
 		for (var i = 0; i < 5 ; i++) {
 			var twitterHandle = firebase.localDB[i].twitter;
@@ -46,6 +74,6 @@ var firebase = {
 			 " <p class='right'>" + firebase.localDB[i].score + "</p></li>");
 
 		}
-	}
+	},
 
 };

@@ -247,6 +247,19 @@ button.singleButton {
   width: 50%;
   margin: 0 auto;
 }
+button.doubleButton {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.buttonContainer {
+  width: 100%;
+}
+
+.buttonHolder {
+  width: 50%;
+  float: left;
+}
 
 footer {
   width: 486px;
@@ -345,7 +358,7 @@ ol > li:before {
   left: 0;
   width: 10%;
   color: #ecf0f1;
-  background-color: #a82315;
+  background-color: #e74c3c;
   font-size: 40px;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 700;
@@ -364,7 +377,7 @@ ol > li:before {
   left: 0;
   width: 10%;
   color: #ecf0f1;
-  background-color: #a82315;
+  background-color: #e74c3c;
   font-size: 40px;
   margin: 0;
 }
@@ -380,7 +393,7 @@ ol > li:before {
   background-color: #ecf0f1;
 }
 .scoreListItem .middle .bottom {
-  color: #a82315;
+  color: #e74c3c;
 }
 .scoreListItem .middle input {
   background-color: inherit;
@@ -390,7 +403,7 @@ ol > li:before {
   color: black;
 }
 .scoreListItem .middle input.bottom {
-  color: #a82315;
+  color: #e74c3c;
 }
 .scoreListItem .middle .usrlvl {
   float: right;
@@ -404,7 +417,7 @@ ol > li:before {
   padding: 5px;
   width: 20%;
   height: 100%;
-  background-color: #a82315;
+  background-color: #e74c3c;
   color: #ecf0f1;
 }
 

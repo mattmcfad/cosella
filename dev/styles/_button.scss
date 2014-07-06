@@ -14,7 +14,22 @@ button {
         width: 50%;
         @include m0;
     }
+
+    &.doubleButton {
+    	width: 75%;
+    	@include m0;
+    }
 }
+
+.buttonContainer {
+	width: 100%;
+}
+.buttonHolder {
+	width: 50%;
+	float: left;
+}
+
+
 
 footer {
 	width: $gridSize;

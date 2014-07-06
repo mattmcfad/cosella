@@ -1,18 +1,22 @@
-.overlay#highScore(style="display:block")
+.overlay#highScore
 	.modal
 		h3 High Scores
-		.top10Scores
+		.top5Scores
 			ol 
 		h3 Submit your score:
-		.scoreListItem#userResults
-			p.left#userRank 3
+		.scoreListItem.clearfix#userResults
+			p.left#usrRank 
 			form.middle
 				div.top
 					input#inputName.textInput(type="text", maxlength="18", placeholder="Your Name")
 					span.usrlvl Level
 				div.bottom
 					input#inputTwitter.textInput(type="text", maxlength="18", placeholder="Your Twitter Handle")
-					span.usrlvl 8
-			p.right#usrpoints 9999 
-
+					span.usrlvl#usrlvl
+			p.right#usrpoints 
+			.buttonContainer.clearfix(style="margin-top:100px")
+				.buttonHolder
+					button.playAgain.doubleButton Play Again?
+				.buttonHolder
+					button#submitScore.doubleButton Submit Score
 				

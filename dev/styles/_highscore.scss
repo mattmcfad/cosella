@@ -9,24 +9,20 @@ ol {
 		
 		height: 51px;
 		position: relative;
-		//padding: 5px;
 		
 		&:before{
 			position: absolute;
 			top:0;
-			//left: 8px;
-			//width: 6%;
-
 			left: 0;
 			width: 10%;
 			color: $white;
-			background-color: $accenta;
+			background-color: $accent;
 			
 
 			font-size: 40px;
 			@include helvheavy;
 
-			 content: counter(li-counter);
+			content: counter(li-counter);
     		counter-increment: li-counter;
 		}	
 	}
@@ -42,12 +38,10 @@ ol {
 	.left {
 		position: absolute;
 		top: 0;
-		//left: 8px;
-		//width: 6%;
 		left: 0;
 		width: 10%;
 		color: $white;
-		background-color: $accenta;
+		background-color: $accent;
 
 		font-size: 40px;
 		margin: 0;
@@ -64,7 +58,7 @@ ol {
 
 		background-color: $cloudwhite;
 		.bottom {
-			color: $accenta;
+			color: $accent;
 		}
 
 		input{
@@ -75,11 +69,9 @@ ol {
 				color: black;
 			}
 			&.bottom {
-				color: $accenta;
+				color: $accent;
 			}
-
 		}
-
 		.usrlvl {
 			float: right;
 			width: 20%;
@@ -94,7 +86,7 @@ ol {
 		width: 20%;
 		height: 100%;
 		
-		background-color: $accenta;
+		background-color: $accent;
 		color: $white;
 		
 	}

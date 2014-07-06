@@ -137,8 +137,14 @@ var app = {
 		});
 
 		// Game Over
-		$('#playAgain').on('click', function(){
+		$('.playAgain').on('click', function(){
 			app.restartGame();
+		});
+
+		// HighScores
+
+		$('#highScores').on('click', function() {
+			app.highScores();
 		});
 
 		// Footer buttons
@@ -500,8 +506,6 @@ var app = {
 		$('#timesUp').fadeIn();
 		$('#gameOverOcto').attr('src','images/octocats/gameover.png');
 
-		firebase.push("matt","@mattmcfad",app.currentLevel, app.score);
-
 	},
 
 	//--------------------
@@ -514,8 +518,17 @@ var app = {
 
 		app.init();
 		app.eventListeners();
-
+		$('#highScore').fadeOut();
 		$('#timesUp').fadeOut();
+	},
+
+	//--------------------
+	// High Scores page
+	highScores: function() {
+		$('#highScore').fadeIn();
+		firebase.getHighscores();
+		firebase.parseScore(app.score, app.currentLevel);
+		$('#timesUp').hide();
 	}
 			
 
