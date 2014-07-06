@@ -341,6 +341,11 @@ footer .buttonHolder#inst {
 .overlay .modal .octocat {
   height: 70%;
 }
+.overlay#error .modal, .overlay#submit .modal {
+  width: 325px;
+  height: 175px;
+  margin: 300px auto;
+}
 
 ol {
   list-style-type: none;

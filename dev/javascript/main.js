@@ -97,7 +97,7 @@ var app = {
 				// 2nd click
 				else { 
 					// Make sure not selecting same cell
-					if (app.getId( selectedCellData.x,selectedCellData.y) === app.getId( app.first.x, app.first.y) ){
+					if (app.getId(selectedCellData.x,selectedCellData.y) === app.getId( app.first.x, app.first.y) ){
 						// If selected same class, removed selected, reset to 1st click
 						selectedCell.removeClass('selected');
 						select = false;
@@ -145,6 +145,21 @@ var app = {
 
 		$('#highScores').on('click', function() {
 			app.highScores();
+		});
+
+		$('#submitScore').on('click', function() {
+			var twitter =$('#inputTwitter').val();
+			var name = $('#inputName').val();
+
+			if (name === ''){
+				app.displayMessage('error');
+			}
+			else {
+				if( twitter === '')
+					twitter = '@mattmcfad';
+				app.submitScore(name, twitter);
+			}
+
 		});
 
 		// Footer buttons
@@ -517,18 +532,35 @@ var app = {
 		timer.pause();
 
 		app.init();
+		firebase.init();
 		app.eventListeners();
 		$('#highScore').fadeOut();
 		$('#timesUp').fadeOut();
+		$('input').val('');
 	},
 
 	//--------------------
 	// High Scores page
 	highScores: function() {
 		$('#highScore').fadeIn();
-		firebase.getHighscores();
 		firebase.parseScore(app.score, app.currentLevel);
+		firebase.getHighscores();
 		$('#timesUp').hide();
+		$('#submitScore').show();
+	},
+
+	submitScore: function(name, twitterHandle) {
+
+		firebase.push(name, twitterHandle, app.currentLevel, app.score);
+		$('#submitScore').fadeOut();
+		app.displayMessage('submit');
+	},
+
+	displayMessage: function(msg) {
+		$('#'+msg).show();
+		setTimeout(function() {
+			$('#'+msg).fadeOut();
+		}, 1500);
 	}
 			
 

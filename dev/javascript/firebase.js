@@ -38,11 +38,12 @@ var firebase = {
 	},
 
 	getRank: function() {
+		
 		firebase.sortDB();
 
 		for (var i = 0; i < firebase.localDB.length; i++){
 			if(firebase.localDB[i].name === "You!")
-				return i;
+				return (i+1);
 		}
 
 		return '99';
@@ -55,8 +56,6 @@ var firebase = {
 	},
 	
 	getHighscores: function() {
-
-		firebase.sortDB();
 
 		var selector = $('ol');
 		selector.html('');

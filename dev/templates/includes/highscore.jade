@@ -4,19 +4,24 @@
 		.top5Scores
 			ol 
 		h3 Submit your score:
-		.scoreListItem.clearfix#userResults
+		.scoreListItem.clearfix#usrResults
 			p.left#usrRank 
 			form.middle
 				div.top
-					input#inputName.textInput(type="text", maxlength="18", placeholder="Your Name")
+					input#inputName.textInput(type="text", maxlength="18", placeholder="Your Name", required)
 					span.usrlvl Level
 				div.bottom
 					input#inputTwitter.textInput(type="text", maxlength="18", placeholder="Your Twitter Handle")
 					span.usrlvl#usrlvl
 			p.right#usrpoints 
-			.buttonContainer.clearfix(style="margin-top:100px")
-				.buttonHolder
-					button.playAgain.doubleButton Play Again?
-				.buttonHolder
-					button#submitScore.doubleButton Submit Score
-				
+		.buttonContainer.clearfix(style="margin-top:100px")
+			.buttonHolder
+				button.playAgain.doubleButton Play Again?
+			.buttonHolder
+				button#submitScore.doubleButton(type="submit") Submit Score
+.overlay#error
+	.modal
+		h3 Please Enter your name!
+.overlay#submit
+	.modal
+		h3 Your score has been submitted
