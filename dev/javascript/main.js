@@ -351,7 +351,7 @@ var app = {
 	getOctocat: function() {
 
 		//only got octocats.length dude!
-		if (app.currentLevel === octocats.length)
+		if (app.currentLevel >= octocats.length)
 			return octocats[octocats.length-1];
 
 		// Ordering starts at 1, then need to get last level so subtract again
@@ -638,6 +638,7 @@ var app = {
 
 		// Reset input, close modals, remove animation
 		$('#countdown').removeClass('lowTime');
+		$('button').removeClass('depletedButton');
 		$('#highScore').fadeOut();
 		$('#timesUp').fadeOut();
 		$('input').val('');
