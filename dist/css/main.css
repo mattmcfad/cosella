@@ -297,7 +297,7 @@ button.doubleButton {
 }
 
 footer {
-  width: 486px;
+  width: 475px;
   margin: 0 auto;
 }
 footer .buttonHolder {
@@ -311,7 +311,7 @@ footer .buttonHolder span {
   font-weight: 700;
 }
 footer .buttonHolder#tim {
-  margin-left: 0;
+  margin-left: 2px;
 }
 footer .buttonHolder#inst {
   margin-right: 0;
@@ -331,8 +331,8 @@ footer .buttonHolder#inst {
 }
 .overlay .modal {
   position: relative;
-  width: 600px;
-  height: 640px;
+  width: 625px;
+  height: 665px;
   background: white;
   border-radius: 2px;
   -webkit-box-shadow: -2px 2px 4px #7f8c8d;
@@ -340,6 +340,9 @@ footer .buttonHolder#inst {
   margin: 55px auto;
   padding: 25px 40px;
   text-align: center;
+}
+.overlay .modal p#instructPara {
+  margin-bottom: 30px;
 }
 .overlay .modal h3 {
   margin: 15px auto;
@@ -468,12 +471,13 @@ ol > li:before {
 h1 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 700;
-  margin: 10px auto;
+  margin: 0 auto;
   margin-top: 22px;
   text-align: center;
   font-size: 48px;
   color: #e74c3c;
   letter-spacing: 5px;
+  text-transform: uppercase;
 }
 
 h3 {
@@ -562,29 +566,30 @@ a {
 
 .wrapper {
   margin: 0 auto;
+  width: 700px;
 }
 
 .gamebox {
   margin: 0 auto;
-  width: 600px;
-  height: 640px;
+  width: 625px;
   border-radius: 5px;
-  padding: 20px;
+  padding: 18px;
   padding-top: 0;
 }
 .gamebox .header {
   margin: inherit;
-  width: 486px;
+  width: 479px;
 }
 .gamebox .header h2 {
+  margin-bottom: 0;
   float: left;
 }
 .gamebox .header h2#time {
   text-align: left;
-  width: 70%;
+  width: 60%;
 }
 .gamebox .header h2#score {
-  width: 30%;
+  width: 40%;
   text-align: right;
 }
 .gamebox .header h2 p, .gamebox .header h2 #totscore {
@@ -592,13 +597,13 @@ a {
 }
 .gamebox .gamegrid {
   margin: inherit;
-  width: 486px;
-  height: 486px;
+  width: 566px;
+  height: 566px;
   border: inherit;
 }
 .gamebox .gamegrid .cell {
-  width: 40px;
-  height: 40px;
+  width: 47px;
+  height: 47px;
   -webkit-background-size: cover cover;
           background-size: cover;
   float: left;

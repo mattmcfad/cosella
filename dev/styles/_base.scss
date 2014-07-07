@@ -5,28 +5,30 @@ a {
 
 .wrapper {
 	@include m0;
+	width: 700px;
 }
 
 .gamebox {
 	@include m0;
 	width: $boxSize;
-	height: $boxSize + 40px; // Account for bottom buttons
+	//height: $boxSize; // Account for bottom buttons
 	border-radius: 5px;
-	padding: 20px;
+	padding: 18px;
 	padding-top: 0;
 
 
 	.header {
 		margin: inherit;
-		width: $gridSize;
-		h2 {	
+		width:  479px;
+		h2 {
+			margin-bottom: 0;	
 			float: left;
 			&#time {
 				text-align: left;
-				width: 70%;
+				width: 60%;
 			}
 			&#score {
-				width: 30%;
+				width: 40%;
 				text-align: right;
 			}
 			p, #totscore {

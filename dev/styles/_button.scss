@@ -42,7 +42,7 @@ button {
 
 
 footer {
-	width: $gridSize;
+	width: 475px;
 	@include m0;
 
 	.buttonHolder {
@@ -56,7 +56,7 @@ footer {
 
 		}
 		&#tim{
-			margin-left: 0;
+			margin-left: 2px;
 		}
 
 		&#inst {

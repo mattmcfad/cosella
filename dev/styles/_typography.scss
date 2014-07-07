@@ -1,12 +1,13 @@
 
 h1 {
 	@include helvheavy;
-	margin: 10px auto;
+	margin: 0 auto;
 	margin-top: 22px;
 	text-align: center;
 	font-size: 48px;
 	color: $accent;
 	letter-spacing: 5px;
+	text-transform: uppercase;
 }
 
 h3 {
