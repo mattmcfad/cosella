@@ -3,7 +3,7 @@
 		h3 High Scores
 		.top5Scores
 			ol 
-		h3 Submit your score:
+		h3#highScoreHeader Submit your score:
 		.scoreListItem.clearfix#usrResults
 			p.left#usrRank 
 			form.middle
@@ -14,7 +14,7 @@
 					input#inputTwitter.textInput(type="text", maxlength="18", placeholder="Your Twitter Handle")
 					span.usrlvl#usrlvl
 			p.right#usrpoints 
-		.buttonContainer.clearfix(style="margin-top:100px")
+		.buttonContainer.clearfix#highScoreContainer
 			.buttonHolder
 				button.playAgain.doubleButton Play Again?
 			.buttonHolder

@@ -597,6 +597,7 @@ var app = {
 		app.init();
 		firebase.init();
 		app.eventListeners();
+		$('#countdown').removeClass('lowTime');
 		$('#highScore').fadeOut();
 		$('#timesUp').fadeOut();
 		$('input').val('');

@@ -285,6 +285,9 @@ button.doubleButton {
 .buttonContainer {
   width: 100%;
 }
+.buttonContainer#highScoreContainer {
+  margin-top: 60px;
+}
 
 .buttonHolder {
   width: 50%;
@@ -413,6 +416,11 @@ ol > li:before {
   counter-increment: li-counter;
 }
 
+.top5Scores {
+  height: 255px;
+  overflow: scroll;
+}
+
 .scoreListItem {
   border: 1px solid rgba(255, 255, 255, 0.9);
   height: 51px;
@@ -466,6 +474,10 @@ ol > li:before {
   height: 100%;
   background-color: #e74c3c;
   color: #ecf0f1;
+}
+
+#highScoreHeader {
+  margin-top: 45px;
 }
 
 h1 {

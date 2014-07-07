@@ -60,7 +60,7 @@ var firebase = {
 		var selector = $('ol');
 		selector.html('');
 		// || i < firebase.localDB.length
-		for (var i = 0; i < 5 ; i++) {
+		for (var i = 0; i < firebase.localDB.length ; i++) {
 			var twitterHandle = firebase.localDB[i].twitter;
 			// Ensure @ is on front of twitter handle
 			if (twitterHandle.charAt(0) !== '@')
