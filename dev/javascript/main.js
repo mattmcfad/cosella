@@ -343,9 +343,15 @@ var app = {
 	},
 
 	//--------------------
-	// Randomly select an Octocat for next level
-	// @return String - filename of an Octocat
+    // Get's the appropriate octocat to displayed on Next Level Modal
+	// @return Obj - structure of an Octocat with img, quote and button quote
 	getOctocat: function() {
+
+		return octocats[app.currentLevel-2];
+
+		
+		/* 	// Randomly select an Octocat for next level
+
 		var rand = Math.floor((Math.random() * (octocats.length)));
 		
 		// Ensure that we are getting an octocat that hasn't already been used
@@ -356,6 +362,8 @@ var app = {
 		// If it has been used then try again!
 		else
 			return app.getOctocat();
+
+		*/
 	},
 
 	//--------------------
@@ -492,9 +500,16 @@ var app = {
 	nextLevel: function(bonusTime) {
 		$('#nextLevel').fadeIn();
 		$('.totscore').html(app.score);
-		var image = 'images/octocats/' + app.getOctocat();
+
+		var octocat = app.getOctocat();
+
+		var image = 'images/octocats/' + octocat.img;
+		var quote = octocat.msg;
+		var button = octocat.button;
 		
 		$('#octocat').attr('src',image);
+		$('#quote').text(quote);
+		$('#nextLvl').text(button);
 	},
 
 
