@@ -351,7 +351,7 @@ var app = {
 	getOctocat: function() {
 
 		//only got octocats.length dude!
-		if (currentLevel === octocats.length)
+		if (app.currentLevel === octocats.length)
 			return octocats[octocats.length-1];
 
 		// Ordering starts at 1, then need to get last level so subtract again
@@ -494,7 +494,7 @@ var app = {
 			// Reset time
 			app.count = app.timeLimit - timeReduced;
 			// After level 13 you only have 10 seconds....
-			if (app.count === 0)
+			if (app.count <= 0)
 				app.count = 10000;
 			$('#countdown').html(formatTime(app.count));
 			
