@@ -1,5 +1,4 @@
-
-/*	Global Variables
+/*	app's Global Variables
  *	app.totCells     - Int Total # of cells on board
  *  app.currentLevel - Int Current level (1 - 4)
  *  app.totSolved    - Int Total # of solved Icons for current level
@@ -26,18 +25,15 @@ var app = {
 	init: function(){
 	
 		// 100 seconds per level
-		//--------------------
 		app.timeLimit = 100000;
 		
 		// Initialize Timer counter
-		//--------------------
 		app.count = app.timeLimit;
 		$('#countdown').html(formatTime(app.count));
 		// Initialize timer
 		timer.set({ time : 10, autostart : false });
 
 		// Initialize score
-		//--------------------
 		app.score = 0; 	
 		$('.totscore').html(app.score);
 
@@ -57,7 +53,6 @@ var app = {
 		$('#addReOrder').text(app.reOrders);
 
 		// Build HTML used to append cells to grid
-		//--------------------
 		var cellStart = '<div class=cell data-id="null" style="background-color: rgba(237,236,236,1)" id=';
 		var cellNullStart = '<div class=cell data-id="null" style="background-color: transparent" id=';
 		var cellEnd = "></div>";
@@ -161,16 +156,19 @@ var app = {
 			app.highScores();
 		});
 
+		// Submitting your score button
 		$('#submitScore').on('click', function() {
 			var twitter =$('#inputTwitter').val();
 			var name = $('#inputName').val();
 
+			// Make sure you remember to add a name
 			if (name === ''){
 				app.displayMessage('error');
 			}
 			else {
+				// If you have no twitter handle or forgot
 				if( twitter === '')
-					twitter = '@mattmcfad';
+					twitter = '@mattmcfad'; // then we're using mine!
 				app.submitScore(name, twitter);
 			}
 
@@ -183,14 +181,13 @@ var app = {
 				app.addMoreTime();
 		});
 
-		$("#instruct").on("click", function(){
-			app.instructions();
-		});
-
+		// reOrders the board and depletes a usage
 		$('#reOrder').on("click", function(){
+			// If we haven't ran out of re Orders allowed
 			if (app.reOrders !== 0){
 				app.reOrder(app.rows,app.columns,app.start);
 				app.reOrders--;
+				// Add depleted if we ran out now
 				if (app.reOrders === 0){
 					$('#reOrder').addClass('depletedButton');
 				}
@@ -198,10 +195,16 @@ var app = {
 			}
 		});
 
-
+		$("#instruct").on("click", function(){
+			app.instructions();
+		});
 
 	},// eventListeners
 
+	//--------------------
+    // After game reset need to reApply Event Handlers for cells (which are reset)
+    // but also need to remove the button's event handlers
+    // else buttons will be doubly pressed
 	removeEventHandlers: function() {
 		$('button').off();
 	},
@@ -347,6 +350,11 @@ var app = {
 	// @return Obj - structure of an Octocat with img, quote and button quote
 	getOctocat: function() {
 
+		//only got octocats.length dude!
+		if (currentLevel === octocats.length)
+			return octocats[octocats.length-1];
+
+		// Ordering starts at 1, then need to get last level so subtract again
 		return octocats[app.currentLevel-2];
 
 		
@@ -490,14 +498,14 @@ var app = {
 				app.count = 10000;
 			$('#countdown').html(formatTime(app.count));
 			
-			app.nextLevel(bonusPoints);
+			app.nextLevel();
 		}
 	},
 
 
 	//--------------------
 	// Display Next Level modal with a new Octocat
-	nextLevel: function(bonusTime) {
+	nextLevel: function() {
 		$('#nextLevel').fadeIn();
 		$('.totscore').html(app.score);
 
@@ -580,12 +588,18 @@ var app = {
 
 	},
 
+	//--------------------
+	// Add 10 seconds to game and deduct 1 usage
 	addMoreTime: function() {
+		// Deduct usage
 		app.moreTime--;
+		// If 0 then make button depleted
 		if (app.moreTime === 0){
 			$('#moreTime').addClass('depletedButton');
 		}
+		// Update text
 		$('#addMoreTime').text(app.moreTime);
+		// Increase time by 10 seconds
 		app.count = app.count + 10000;
 	},
 
@@ -611,12 +625,18 @@ var app = {
 		// Reset Divs
 		$('#gamegrid').html('');
 		
+		// stop Timer
 		timer.pause();
-
+		// Reset Game
 		app.init();
+		// Reset DB
 		firebase.init();
+		// Remove button event handlers to prevent double click
 		app.removeEventHandlers();
+		// Re-enable all event handlers
 		app.eventListeners();
+
+		// Reset input, close modals, remove animation
 		$('#countdown').removeClass('lowTime');
 		$('#highScore').fadeOut();
 		$('#timesUp').fadeOut();
@@ -632,7 +652,10 @@ var app = {
 		$('#timesUp').hide();
 		$('#submitScore').show();
 	},
-
+	//--------------------
+	// Push to Firebase Database
+	// @param name - String user submitted name
+	// @param twitterHandle - String user submitted, default @mattmcfad
 	submitScore: function(name, twitterHandle) {
 
 		firebase.push(name, twitterHandle, app.currentLevel, app.score);
@@ -640,8 +663,11 @@ var app = {
 		app.displayMessage('submit');
 	},
 
+	//--------------------
+	// Display either Error or Submit modal
 	displayMessage: function(msg) {
 		$('#'+msg).show();
+		// Show only for 1.5 seconds
 		setTimeout(function() {
 			$('#'+msg).fadeOut();
 		}, 1500);
