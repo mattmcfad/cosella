@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 		//minify JS 
 		uglify: {
 			options: {
-				mangle: false
+				mangle: true
 			},
 			js: {
 				files: { // dest : src
