@@ -202,6 +202,10 @@ var app = {
 
 	},// eventListeners
 
+	removeEventHandlers: function() {
+		$('button').off();
+	},
+
 	//--------------------
 	// buildIcons - function that evenly generates all icons and draws to grid
 	// @param level - int representing which level in game 
@@ -596,6 +600,7 @@ var app = {
 
 		app.init();
 		firebase.init();
+		app.removeEventHandlers();
 		app.eventListeners();
 		$('#countdown').removeClass('lowTime');
 		$('#highScore').fadeOut();
