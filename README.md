@@ -13,6 +13,7 @@ The goal of the game is to match squares that contain the same icon. You can mat
 * Different Paths you can Match Squares.
 	1. Straight line
 		
+		```
 		[X]---[X]
 		
 			or
@@ -21,32 +22,39 @@ The goal of the game is to match squares that contain the same icon. You can mat
 			 |
 			 |
 			[X]
+		```
 
 	2. "L" shaped Path in any direction for example:
-
+		
+		```
 			 [X]      ----[X]
 			  |      |
 			  |	     |
 		[X]----     [X]
+		```
 
 	3. "U" Shaped Path in any direction for example:
-
+		
+		```
 		[X]   [X]   [X]---
 		 |     |          |
 		 |_____|    [X]---
+		```
 
 	4. "Zig-Zag" Path in any direction for example:
-
-		 [X]----             [X]
-		 	   |           ___|
-		 	   ----[X]    |
-		 	   		     [X]
+		
+		```
+		[X]----             [X]
+			   |           ___|
+			   ----[X]    |
+	   		             [X]
+	    ```
 
 * 'MORE TIME' Power Up
 	* Adds 10 seconds to the game clock
 	* Match a Green Robots to add an additional Power-Up
 	* Start game with 3
-	
+
 * 'RE-ORDER' Button
 	* re-arrange all the unsolved squares on cells that haven't been solved
 	* You can use RE-ORDER twice per level
