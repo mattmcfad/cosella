@@ -1,13 +1,21 @@
 {
-  "name": "Mahjong",
+  "name": "Cosella",
   "version": "0.0.0",
-  "description": "Matching game",
+  "description": "Logic based matching game",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mmcfadyen91/cosella.git"
+  },
+  "author": "@mattmcfad",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmcfadyen91/cosella/issues"
+  },
+  "homepage": "http://mmcfadyen.ca/cosella",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^0.7.5",
