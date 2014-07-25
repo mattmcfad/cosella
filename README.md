@@ -14,40 +14,36 @@ The goal of the game is to match squares that contain the same icon. You can mat
 	1. Straight line
 		
 		```
-		[X]---[X]
-		
-			or
-		
-			[X]
-			 |
-			 |
-			[X]
+		            [X]
+		[X]---[X]    |
+		             |
+		            [X]
 		```
 
 	2. "L" shaped Path in any direction for example:
 		
 		```
-			 [X]      ----[X]
-			  |      |
-			  |	     |
-		[X]----     [X]
+			  [X]      ----[X]  [X]----      [X]
+			   |      |                |      |
+			   |	  |                |      |
+		[X]----      [X]              [X]      ----[X]
 		```
 
 	3. "U" Shaped Path in any direction for example:
 		
 		```
-		[X]   [X]   [X]---
-		 |     |          |
-		 |_____|    [X]---
+		[X]   [X]   [X]---    ---[X]    ____   
+		 |     |          |  |         |    |
+		 |_____|    [X]---    ---[X]  [X]  [X]
 		```
 
 	4. "Zig-Zag" Path in any direction for example:
 		
 		```
-		[X]----             [X]
-			   |           ___|
-			   ----[X]    |
-	   		             [X]
+		[X]----              [X]  [X]                 ----[X]
+			   |           ___|    |____             |
+			    ---[X]    |             |     [X]----
+	   		             [X]           [X]
 	    ```
 
 * 'MORE TIME' Power Up
@@ -85,8 +81,11 @@ The goal of the game is to match squares that contain the same icon. You can mat
 	```
 3. Deploy to server
 	
-	* Mangle Js file with uglify task for.
+	* Mangle Js file with uglify task for distribution to a server.
 	* Use all files in dist/ folder
 	```
 	grunt deploy
 	```
+
+##Author
+[Matt McFadyen](http://twitter.com/mattmcfad)
