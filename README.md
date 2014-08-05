@@ -6,6 +6,15 @@
 
 Recreating [a flash game](http://www.g12345.com/2042.html) to test my skills in JavaScript & jQuery. Built multiple algorithms to check different kinds of matches available. The game includes instructions on how to match squares, multiple levels, 'MORE TIME' Power Up, 'RE-ORDER' the unsolved squares, and a Highscore system built in Firebase.
 
+##Technologies
+
+* JavaScript & jQuery
+* Firebase
+* Jade
+* SASS
+* Grunt
+* Bower
+
 ##Instructions
 
 The goal of the game is to match squares that contain the same icon. You can match squares by clicking on them. There are 4 different paths you can take to match a square. The path needs to be free of other unsolved squares. The path you can take can change direction 3 times.
@@ -55,16 +64,6 @@ The goal of the game is to match squares that contain the same icon. You can mat
 	* re-arrange all the unsolved squares on cells that haven't been solved
 	* You can use RE-ORDER twice per level
 	* Resets back to 2 every level.
-
-
-##Technologies
-
-* JavaScript & jQuery
-* Firebase
-* Jade
-* SASS
-* Grunt
-* Bower
 
 ##Getting Started
 
