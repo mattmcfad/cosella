@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mmcfadyen91/cosella.git"
+    "url": "https://github.com/mattmcfad/cosella.git"
   },
   "author": "@mattmcfad",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mmcfadyen91/cosella/issues"
+    "url": "https://github.com/mattmcfad/cosella/issues"
   },
   "homepage": "http://mmcfadyen.ca/cosella",
   "devDependencies": {
